@@ -1,0 +1,43 @@
+{
+    "name":        "josantonius/url",
+    "version":     "1.0.0",
+    "type":        "library",
+    "description": "Library for urls manipulation.",
+    "keywords": [
+        "Url",
+        "Uri",
+        "Path",
+        "HTTPS",
+        "HHVM",
+        "PHP"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Josantonius",
+            "email":    "info@josantonius.com",
+            "homepage": "https://github.com/josantonius",
+            "role":     "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
+    "require": {
+        "php" : ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Josantonius\\Url\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Josantonius\\Url\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
