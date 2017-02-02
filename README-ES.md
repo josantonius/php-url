@@ -34,8 +34,6 @@ Para instalar PHP Url library, simplemente escribe:
 
 Esta ĺibrería es soportada por versiones de PHP 5.6 o superiores y es compatible con versiones de HHVM 3.0 o superiores.
 
-Para utilizar esta librería en HHVM (HipHop Virtual Machine) tendrás que activar los tipos escalares. Añade la siguiente ĺínea "hhvm.php7.scalar_types = true" en tu "/etc/hhvm/php.ini".
-
 ### Cómo empezar y ejemplos
 
 Para utilizar esta librería, simplemente:
