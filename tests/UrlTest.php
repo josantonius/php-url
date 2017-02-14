@@ -2,15 +2,11 @@
 /**
  * Library for urls manipulation.
  * 
- * @category   JST
- * @package    Url
- * @subpackage UrlTest
  * @author     Josantonius - info@josantonius.com
  * @copyright  Copyright (c) 2017 JST PHP Framework
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @version    1.0.0
  * @link       https://github.com/Josantonius/PHP-Url
- * @since      File available since 1.0.0 - Update: 2017-02-02
+ * @since      File available since 1.0.0 - Update: 2017-02-14
  */
 
 namespace Josantonius\Url\Tests;
@@ -65,13 +61,23 @@ class UrlTest {
     }
 
     /**
-     * Get path of the url.
+     * Get uri.
      *
      * @since 1.0.0
      */
     public static function testGetUri() {
 
 	    echo '<pre>'; var_dump(Url::getUri()); echo '</pre>'; 
+    }
+
+    /**
+     * Remove subdirectories from uri if they exist.
+     *
+     * @since 1.0.0
+     */
+    public static function testGetUriMethods() {
+
+        echo '<pre>'; var_dump(Url::getUriMethods()); echo '</pre>'; 
     }
 
     /**

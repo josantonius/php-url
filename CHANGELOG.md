@@ -7,6 +7,7 @@
 * Added `Josantonius\Url\Url::isSSL()` method.
 * Added `Josantonius\Url\Url::getDomain()` method.
 * Added `Josantonius\Url\Url::getUri()` method.
+* Added `Josantonius\Url\Url::getUriMethods()` method.
 * Added `Josantonius\Url\Url::getPort()` method.
 * Added `Josantonius\Url\Url::addBackslash()` method.
 * Added `Josantonius\Url\Url::previous()` method.
