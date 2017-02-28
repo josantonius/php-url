@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Library for urls manipulation.
  * 
@@ -6,7 +6,7 @@
  * @copyright  Copyright (c) 2017 JST PHP Framework
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link       https://github.com/Josantonius/PHP-Url
- * @since      File available since 1.0.0 - Update: 2017-02-14
+ * @since      1.0.0
  */
 
 namespace Josantonius\Url\Tests;
@@ -27,7 +27,17 @@ class UrlTest {
      */
     public static function testGetCurrentPage() {
 
-	    echo '<pre>'; var_dump(Url::getCurrentPage()); echo '</pre>'; 
+        echo '<pre>'; var_dump(Url::getCurrentPage()); echo '</pre>'; 
+    }
+
+    /**
+     * Get base url of the site.
+     *
+     * @since 1.0.0
+     */
+    public static function testGetBaseUrl() {
+
+        echo '<pre>'; var_dump(Url::getBaseUrl()); echo '</pre>'; 
     }
 
     /**
@@ -37,7 +47,7 @@ class UrlTest {
      */
     public static function testGetProtocol() {
 
-	    echo '<pre>'; var_dump(Url::getProtocol()); echo '</pre>'; 
+        echo '<pre>'; var_dump(Url::getProtocol()); echo '</pre>'; 
     }
 
     /**
@@ -47,7 +57,7 @@ class UrlTest {
      */
     public static function testIsSSL() {
 
-	    echo '<pre>'; var_dump(Url::isSSL()); echo '</pre>'; 
+        echo '<pre>'; var_dump(Url::isSSL()); echo '</pre>'; 
     }
 
     /**
@@ -57,7 +67,7 @@ class UrlTest {
      */
     public static function getDomain() {
 
-	    echo '<pre>'; var_dump(Url::testGetProtocol()); echo '</pre>'; 
+        echo '<pre>'; var_dump(Url::testGetProtocol()); echo '</pre>'; 
     }
 
     /**
@@ -67,7 +77,7 @@ class UrlTest {
      */
     public static function testGetUri() {
 
-	    echo '<pre>'; var_dump(Url::getUri()); echo '</pre>'; 
+        echo '<pre>'; var_dump(Url::getUri()); echo '</pre>'; 
     }
 
     /**
@@ -87,7 +97,7 @@ class UrlTest {
      */
     public static function testGetPort() {
 
-	    echo '<pre>'; var_dump(Url::getPort()); echo '</pre>'; 
+        echo '<pre>'; var_dump(Url::getPort()); echo '</pre>'; 
     }
 
     /**
@@ -97,7 +107,7 @@ class UrlTest {
      */
     public static function testAddBackslash() {
 
-	    echo '<pre>'; var_dump(Url::addBackslash('path/to')); echo '</pre>'; 
+        echo '<pre>'; var_dump(Url::addBackslash('path/to')); echo '</pre>'; 
     }
     
     /**
@@ -107,7 +117,7 @@ class UrlTest {
      */
     public static function testPrevious() {
 
-    	Url::previous();
+        Url::previous();
     }
 
     /**
@@ -172,7 +182,7 @@ class UrlTest {
      */
     public static function testGetFirstSegment() {
 
-    	$segments = Url::segment('path/to/panel/user');
+        $segments = Url::segment('path/to/panel/user');
 
         echo '<pre>'; var_dump(Url::getFirstSegment($segments)); echo '</pre>'; 
     }
@@ -184,7 +194,7 @@ class UrlTest {
      */
     public static function testGetLastSegment() {
 
-    	$segments = Url::segment('path/to/panel/user');
+        $segments = Url::segment('path/to/panel/user');
 
         echo '<pre>'; var_dump(Url::getLastSegment($segments)); echo '</pre>'; 
     }

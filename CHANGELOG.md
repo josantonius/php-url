@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.0 - 2017-02-28
+* Added `Josantonius\Url\Url::getBaseUrl()` method.
+
+## 1.1.0 - 2017-02-28
+* Added `Josantonius\Url\Tests\UrlTest::testGetBaseUrl()` method.
+
 ## 1.0.0 - 2017-02-02
 * Added `Josantonius\Url\Url` class.
 * Added `Josantonius\Url\Url::getCurrentPage()` method.

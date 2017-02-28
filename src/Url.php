@@ -7,7 +7,7 @@
  * @copyright  Copyright (c) 2017 JST PHP Framework
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link       https://github.com/Josantonius/PHP-Url
- * @since      File available since 1.0.0 - Update: 2017-02-14
+ * @since      1.0.0
  */
 
 namespace Josantonius\Url;
@@ -30,17 +30,33 @@ class Url {
      */
     public static function getCurrentPage() {
 
-	    $protocol = static::getProtocol();
+        $protocol = static::getProtocol();
 
-	    $host = static::getDomain();
+        $host = static::getDomain();
 
-	    $port = ':' . static::getPort();
+        $port = ':' . static::getPort();
 
-	    $port = (($port == ':80') || ($port == ':443')) ? '' : $port;
+        $port = (($port == ':80') || ($port == ':443')) ? '' : $port;
 
-	    $uri = static::getUri();
+        $uri = static::getUri();
 
-	    return $protocol . '://' . $host . $port . $uri;
+        return $protocol . '://' . $host . $port . $uri;
+    }
+
+    /**
+     * Get base url of the site.
+     *
+     * @since 1.1.0
+     *
+     * @return string → url
+     */
+    public static function getBaseUrl() {
+
+        $uri = static::getUriMethods();
+
+        $url = trim(str_replace($uri, '', static::getCurrentPage()), '/');
+
+        return static::addBackslash($url);
     }
 
     /**
@@ -52,13 +68,13 @@ class Url {
      */
     public static function getProtocol() {
 
-	    $protocol = strtolower($_SERVER['SERVER_PROTOCOL']);
+        $protocol = strtolower($_SERVER['SERVER_PROTOCOL']);
 
-	    $protocol = substr($protocol, 0, strpos($protocol, '/'));
+        $protocol = substr($protocol, 0, strpos($protocol, '/'));
 
-	    $ssl = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on');
+        $ssl = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on');
 
-	    return ($ssl) ? $protocol . 's' : $protocol;
+        return ($ssl) ? $protocol . 's' : $protocol;
     }
 
     /**
@@ -70,7 +86,7 @@ class Url {
      */
     public static function isSSL() {
 
-	    return (static::getProtocol() === 'https');
+        return (static::getProtocol() === 'https');
     }
 
     /**
@@ -82,7 +98,7 @@ class Url {
      */
     public static function getDomain() {
 
-	    return $_SERVER['SERVER_NAME'];
+        return $_SERVER['SERVER_NAME'];
     }
 
     /**
@@ -120,7 +136,7 @@ class Url {
      */
     public static function getPort() {
 
-	    return $_SERVER['SERVER_PORT'];
+        return $_SERVER['SERVER_PORT'];
     }
 
     /**
@@ -221,7 +237,7 @@ class Url {
      */
     public static function segment($uri = null) {
 
-    	$uri = (!is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
+        $uri = (!is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
  
         return explode('/', trim($uri, '/'));
     }

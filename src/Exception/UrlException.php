@@ -6,7 +6,7 @@
  * @copyright  Copyright (c) 2017 JST PHP Framework
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link       https://github.com/Josantonius/PHP-Url
- * @since      File available since 1.0.0 - Update: 2017-02-14
+ * @since      1.0.0
  */
 
 namespace Josantonius\Url\Exception;
