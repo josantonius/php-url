@@ -2,7 +2,7 @@
 /**
  * Library for urls manipulation.
  * 
- * @author     Josantonius - info@josantonius.com
+ * @author     Josantonius - hola@josantonius.com
  * @copyright  Copyright (c) 2017 JST PHP Framework
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link       https://github.com/Josantonius/PHP-Url
