@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.2 - 2017-05-08
+* Now you can choose to place backslash at the beginning, end or both ends in the addBackslash() method.
+
+* The getUriMethods() method was improved to prevent it from replacing single characters that also matched.
+
 ## 1.1.1 - 2017-03-18
 * Some files were excluded from download and comments and readme files were updated.
 

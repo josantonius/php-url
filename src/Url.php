@@ -22,6 +22,15 @@ namespace Josantonius\Url;
 class Url {
 
     /**
+     * Directory separator.
+     *
+     * @since 1.1.2
+     *
+     * @var string
+     */
+    const DS = DIRECTORY_SEPARATOR;
+
+    /**
      * Get url from the current page.
      *
      * @since 1.0.0
@@ -30,17 +39,17 @@ class Url {
      */
     public static function getCurrentPage() {
 
-        $protocol = static::getProtocol();
+        $protocol = self::getProtocol();
 
-        $host = static::getDomain();
+        $host = self::getDomain();
 
-        $port = ':' . static::getPort();
+        $port = ':' . self::getPort();
 
         $port = (($port == ':80') || ($port == ':443')) ? '' : $port;
 
-        $uri = static::getUri();
+        $uri = self::getUri();
 
-        return $protocol . '://' . $host . $port . $uri;
+        return $protocol . ':' . self::DS . self::DS . $host . $port . $uri;
     }
 
     /**
@@ -52,11 +61,13 @@ class Url {
      */
     public static function getBaseUrl() {
 
-        $uri = static::getUriMethods();
+        $uri = self::addBackslash(self::getUriMethods(), 'both');
 
-        $url = trim(str_replace($uri, '', static::getCurrentPage()), '/');
+        $currentPage = self::addBackslash(self::getCurrentPage());
 
-        return static::addBackslash($url);
+        $url = trim(str_replace($uri, '', $currentPage), self::DS);
+
+        return self::addBackslash($url);
     }
 
     /**
@@ -70,7 +81,7 @@ class Url {
 
         $protocol = strtolower($_SERVER['SERVER_PROTOCOL']);
 
-        $protocol = substr($protocol, 0, strpos($protocol, '/'));
+        $protocol = substr($protocol, 0, strpos($protocol, self::DS));
 
         $ssl = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on');
 
@@ -86,7 +97,7 @@ class Url {
      */
     public static function isSSL() {
 
-        return (static::getProtocol() === 'https');
+        return (self::getProtocol() === 'https');
     }
 
     /**
@@ -122,9 +133,11 @@ class Url {
      */
     public static function getUriMethods() {
 
-        $subfolder = trim(str_replace($_SERVER["DOCUMENT_ROOT"], '', getcwd()), '/');
+        $root = str_replace($_SERVER["DOCUMENT_ROOT"], '', getcwd());
 
-        return trim(str_replace($subfolder, '', static::getUri()), '/');
+        $subfolder = trim($root, self::DS);
+
+        return trim(str_replace($subfolder, '', self::getUri()), self::DS);
     }
 
     /**
@@ -144,13 +157,30 @@ class Url {
      *
      * @since 1.0.0
      *
-     * @param string $uri → url path
-     * 
-     * @return string → path/url/
+     * @param string $uri      → url path
+     * @param string $position → place where the backslash is placed
+     *
+     * @return string → path/url/ | /path/url | /path/url/
      */
-    public static function addBackslash($uri = null) {
+    public static function addBackslash($uri, $position = 'end') {
 
-        return (substr($uri, -1) === "/") ? $uri : $uri . "/";
+        switch ($position) {
+
+            case 'top':
+
+                return (substr($uri, 1) === self::DS) ? $uri : self::DS.$uri;
+            
+            case 'end':
+                
+                return (substr($uri, -1) === self::DS) ? $uri : $uri.self::DS;
+
+            case 'both':
+
+                $uri = self::addBackslash($uri, 'top');
+                $uri = self::addBackslash($uri, 'end');
+
+                return $uri;
+        }
     }
     
     /**
@@ -239,7 +269,7 @@ class Url {
 
         $uri = (!is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
  
-        return explode('/', trim($uri, '/'));
+        return explode(self::DS, trim($uri, self::DS));
     }
 
     /**
