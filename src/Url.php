@@ -63,9 +63,12 @@ class Url {
 
         $uri = self::addBackslash(self::getUriMethods(), 'both');
 
-        $currentPage = self::addBackslash(self::getCurrentPage());
+        $url = self::addBackslash(self::getCurrentPage());
 
-        $url = trim(str_replace($uri, '', $currentPage), self::DS);
+        if ($uri !== self::DS) {
+            
+            $url = trim(str_replace($uri, '', $url), self::DS);
+        }
 
         return self::addBackslash($url);
     }
