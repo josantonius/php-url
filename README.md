@@ -51,6 +51,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Josantonius\Url\Url;
 ```
+
 ### Available Methods
 
 Available methods in this library:

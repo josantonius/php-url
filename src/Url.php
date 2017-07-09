@@ -4,7 +4,7 @@
  * 
  * @author     Josantonius - hello@josantonius.com
  * @author     David Carr  - dave@simplemvcframework.com
- * @copyright  Copyright (c) 2017 JST PHP Framework
+ * @copyright  Copyright (c) 2017
  * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
  * @link       https://github.com/Josantonius/PHP-Url
  * @since      1.0.0
@@ -12,23 +12,12 @@
 
 namespace Josantonius\Url;
 
-# use Josantonius\Url\Exception\UrlException;
-
 /**
  * Url handler.
  *
  * @since 1.0.0
  */
 class Url {
-
-    /**
-     * Directory separator.
-     *
-     * @since 1.1.2
-     *
-     * @var string
-     */
-    const DS = DIRECTORY_SEPARATOR;
 
     /**
      * Get url from the current page.
@@ -49,7 +38,7 @@ class Url {
 
         $uri = self::getUri();
 
-        return $protocol . ':' . self::DS . self::DS . $host . $port . $uri;
+        return $protocol . '://' . $host . $port . $uri;
     }
 
     /**
@@ -65,9 +54,9 @@ class Url {
 
         $url = self::addBackslash(self::getCurrentPage());
 
-        if ($uri !== self::DS) {
+        if ($uri !== '/') {
             
-            $url = trim(str_replace($uri, '', $url), self::DS);
+            $url = trim(str_replace($uri, '', $url), '/');
         }
 
         return self::addBackslash($url);
@@ -78,13 +67,20 @@ class Url {
      *
      * @since 1.0.0
      *
+     * @param string $url
+     *
      * @return string → http|https
      */
-    public static function getProtocol() {
+    public static function getProtocol($url = false) {
+
+        if ($url) {
+
+            return (preg_match('/^https/', $url)) ? 'https' : 'http';
+        }
 
         $protocol = strtolower($_SERVER['SERVER_PROTOCOL']);
 
-        $protocol = substr($protocol, 0, strpos($protocol, self::DS));
+        $protocol = substr($protocol, 0, strpos($protocol, '/'));
 
         $ssl = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on');
 
@@ -96,11 +92,13 @@ class Url {
      *
      * @since 1.0.0
      *
+     * @param string $url
+     *
      * @return boolean
      */
-    public static function isSSL() {
+    public static function isSSL($url = false) {
 
-        return (self::getProtocol() === 'https');
+        return (self::getProtocol($url) === 'https');
     }
 
     /**
@@ -108,9 +106,18 @@ class Url {
      *
      * @since 1.0.0
      *
-     * @return string → server name
+     * @param string $url
+     *
+     * @return string|false → server name
      */
-    public static function getDomain() {
+    public static function getDomain($url = false) {
+
+        if ($url) {
+
+            preg_match('/([\w]+[.]){1,}[a-z]+/', $url, $matches);
+
+            return isset($matches[0]) ? $matches[0] : false;
+        }
 
         return $_SERVER['SERVER_NAME'];
     }
@@ -138,9 +145,9 @@ class Url {
 
         $root = str_replace($_SERVER["DOCUMENT_ROOT"], '', getcwd());
 
-        $subfolder = trim($root, self::DS);
+        $subfolder = trim($root, '/');
 
-        return trim(str_replace($subfolder, '', self::getUri()), self::DS);
+        return trim(str_replace($subfolder, '', self::getUri()), '/');
     }
 
     /**
@@ -171,11 +178,11 @@ class Url {
 
             case 'top':
 
-                return (substr($uri, 1) === self::DS) ? $uri : self::DS.$uri;
+                return (substr($uri, 1) === '/') ? $uri : '/' . $uri;
             
             case 'end':
                 
-                return (substr($uri, -1) === self::DS) ? $uri : $uri.self::DS;
+                return (substr($uri, -1) === '/') ? $uri : $uri . '/';
 
             case 'both':
 
@@ -240,7 +247,6 @@ class Url {
     /**
      * This function converts and url segment to an safe one.
      * For example: `test name @132` will be converted to `test-name--123`.
-     * Replace every character that isn't an letter or an number to an dash sign.
      * It will also return all letters in lowercase
      *
      * @since 1.0.0
@@ -272,7 +278,7 @@ class Url {
 
         $uri = (!is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
  
-        return explode(self::DS, trim($uri, self::DS));
+        return explode('/', trim($uri, '/'));
     }
 
     /**

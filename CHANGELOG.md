@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.1.3 - 2017-07-09
+* Added option to analyze concrete urls in some methods.
+
 ## 1.1.2 - 2017-05-08
 * Now you can choose to place backslash at the beginning, end or both ends in the addBackslash() method.
 

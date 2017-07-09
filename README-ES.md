@@ -40,7 +40,7 @@ También puedes clonar el repositorio completo con Git:
 
 ### Requisitos
 
-Esta ĺibrería es soportada por versiones de PHP 5.6 o superiores y es compatible con versiones de HHVM 3.0 o superiores.
+Esta biblioteca es soportada por versiones de PHP 5.6 o superiores y es compatible con versiones de HHVM 3.0 o superiores.
 
 ### Cómo empezar y ejemplos
 
