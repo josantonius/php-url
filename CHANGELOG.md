@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.4 - 2017-07-16
+* Deleted `Josantonius\Url\Exception\UrlException` class.
+* Deleted `Josantonius\Url\Exception\Exceptions` abstract class.
+* Deleted `Josantonius\Url\Exception\UrlException->__construct()` method.
+
 ## 1.1.3 - 2017-07-09
 * Added option to analyze concrete urls in some methods.
 
