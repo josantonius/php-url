@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.5 - 2017-09-17
+
+* Added `Josantonius\Url\Url::setUrlParams()` method.
+
 ## 1.1.4 - 2017-07-16
 * Deleted `Josantonius\Url\Exception\UrlException` class.
 * Deleted `Josantonius\Url\Exception\Exceptions` abstract class.

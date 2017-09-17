@@ -151,6 +151,44 @@ class Url {
     }
 
     /**
+     * Set parameters from the url and return url without them.
+     *
+     * If a url is received as: http://www.web.com/&key=value&key-2=value
+     * params will be saved as GET values and return: http://www.web.com/
+     *
+     * If a url is received as: http://www.web.com/?key=value&key-2=value
+     * GET parameters are maintained and return: http://www.web.com/
+     *
+     * @since 1.1.5
+     *
+     * @param string $url → url
+     *
+     * @return string → url
+     */
+    public static function setUrlParams($url) {
+
+        if (strpos($url, '?') == false && strpos($url, '&') != false) {
+
+            $url = preg_replace('/&/', '?', $url, 1);
+
+            $parts = parse_url($url);
+            
+            $query = isset($parts['query']) ? $parts['query'] : '';
+
+            parse_str($query, $query);
+
+            $url = str_replace($query, '', $url);
+        }
+
+        foreach (isset($query) ? $query : [] as $key => $value) {
+                    
+            $_GET[$key] = $value;
+        }
+
+        return explode('?', $url)[0];
+    }
+    
+    /**
      * Get the server port.
      *
      * @since 1.0.0
