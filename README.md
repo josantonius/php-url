@@ -1,6 +1,6 @@
 # PHP Url library
 
-[![Latest Stable Version](https://poser.pugx.org/josantonius/url/v/stable)](https://packagist.org/packages/josantonius/url) [![Total Downloads](https://poser.pugx.org/josantonius/url/downloads)](https://packagist.org/packages/josantonius/url) [![Latest Unstable Version](https://poser.pugx.org/josantonius/url/v/unstable)](https://packagist.org/packages/josantonius/url) [![License](https://poser.pugx.org/josantonius/url/license)](https://packagist.org/packages/josantonius/url)
+[![Latest Stable Version](https://poser.pugx.org/josantonius/url/v/stable)](https://packagist.org/packages/josantonius/url) [![Total Downloads](https://poser.pugx.org/josantonius/url/downloads)](https://packagist.org/packages/josantonius/url) [![Latest Unstable Version](https://poser.pugx.org/josantonius/url/v/unstable)](https://packagist.org/packages/josantonius/url) [![License](https://poser.pugx.org/josantonius/url/license)](https://packagist.org/packages/josantonius/url) [![Travis](https://travis-ci.org/Josantonius/PHP-Url.svg)](https://travis-ci.org/Josantonius/PHP-Url)
 
 [Versión en español](README-ES.md)
 
@@ -14,20 +14,11 @@ Library for urls manipulation.
 - [Available Methods](#available-methods)
 - [Usage](#usage)
 - [Tests](#tests)
+- [TODO](#-todo)
 - [Contribute](#contribute)
 - [Repository](#repository)
 - [License](#license)
 - [Copyright](#copyright)
-
----
-
-<p align="center"><strong>Take a look at the code</strong></p>
-
-<p align="center">
-  <a href="https://youtu.be/94V12hdQWiY" title="Take a look at the code">
-  	<img src="https://raw.githubusercontent.com/Josantonius/PHP-Algorithm/master/resources/youtube-thumbnail.jpg">
-  </a>
-</p>
 
 ---
 
@@ -78,10 +69,12 @@ Url::previous();
 Url::redirect();
 Url::autoLink();
 Url::generateSafeSlug();
-Url::segment();
+Url::segmentUri();
 Url::getFirstSegment();
 Url::getLastSegment();
+Url::setUrlParams();
 ```
+
 ### Usage
 
 Example of use for this library:
@@ -124,7 +117,7 @@ var_dump(Url::autoLink('https://github.com', 'GitHub'));
 var_dump(Url::generateSafeSlug('https://github.com')); 
 # string(16) "https-github-com"
 
-var_dump($segments = Url::segment());
+var_dump($segments = Url::segmentUri());
 /*
 array(2) {
   [0]=>
@@ -144,39 +137,21 @@ print('</pre>');
 
 ### Tests 
 
-To use the [test](tests) class, simply:
+To run [tests](tests/Url/Test) simply:
 
-```php
-<?php
-$loader = require __DIR__ . '/vendor/autoload.php';
+    $ git clone https://github.com/Josantonius/PHP-Url.git
+    
+    $ cd PHP-Url
 
-$loader->addPsr4('Josantonius\\Url\\Tests\\', __DIR__ . '/vendor/josantonius/url/tests');
+    $ phpunit
 
-use Josantonius\Url\Tests\UrlTest;
+### ☑ TODO
 
-```
-Available test methods in this library:
-
-```php
-UrlTest::testGetCurrentPage();
-UrlTest::testGetProtocol();
-UrlTest::testIsSSL();
-UrlTest::getDomain();
-UrlTest::testGetUri();
-UrlTest::testGetUriMethods();
-UrlTest::testGetPort();
-UrlTest::testAddBackslash();
-UrlTest::testPrevious();
-UrlTest::testRedirect();
-UrlTest::testAutoLink();
-UrlTest::testCustomAutoLink();
-UrlTest::testGenerateSafeSlug();
-UrlTest::testSegment();
-UrlTest::testGetFirstSegment();
-UrlTest::testGetLastSegment();
-```
+- [x] Create tests
+- [ ] Improve documentation
 
 ### Contribute
+
 1. Check for open issues or open a new issue to start a discussion around a bug or feature.
 1. Fork the repository on GitHub to start making your changes.
 1. Write one or more tests for the new feature or that expose the bug.
