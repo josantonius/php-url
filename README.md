@@ -1,6 +1,6 @@
 # PHP Url library
 
-[![Latest Stable Version](https://poser.pugx.org/josantonius/url/v/stable)](https://packagist.org/packages/josantonius/url) [![Total Downloads](https://poser.pugx.org/josantonius/url/downloads)](https://packagist.org/packages/josantonius/url) [![Latest Unstable Version](https://poser.pugx.org/josantonius/url/v/unstable)](https://packagist.org/packages/josantonius/url) [![License](https://poser.pugx.org/josantonius/url/license)](https://packagist.org/packages/josantonius/url) [![Travis](https://travis-ci.org/Josantonius/PHP-Url.svg)](https://travis-ci.org/Josantonius/PHP-Url)
+[![Latest Stable Version](https://poser.pugx.org/josantonius/Url/v/stable)](https://packagist.org/packages/josantonius/Url) [![Latest Unstable Version](https://poser.pugx.org/josantonius/Url/v/unstable)](https://packagist.org/packages/josantonius/Url) [![License](https://poser.pugx.org/josantonius/Url/license)](LICENSE) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/769a69c9700f49ff9247e1075b737d99)](https://www.codacy.com/app/Josantonius/PHP-Url?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Josantonius/PHP-Url&amp;utm_campaign=Badge_Grade) [![Total Downloads](https://poser.pugx.org/josantonius/Url/downloads)](https://packagist.org/packages/josantonius/Url) [![Travis](https://travis-ci.org/Josantonius/PHP-Url.svg)](https://travis-ci.org/Josantonius/PHP-Url) [![PSR2](https://img.shields.io/badge/PSR-2-1abc9c.svg)](http://www.php-fig.org/psr/psr-2/) [![PSR4](https://img.shields.io/badge/PSR-4-9b59b6.svg)](http://www.php-fig.org/psr/psr-4/) [![CodeCov](https://codecov.io/gh/Josantonius/PHP-Url/branch/master/graph/badge.svg)](https://codecov.io/gh/Josantonius/PHP-Url)
 
 [Versión en español](README-ES.md)
 
@@ -8,10 +8,10 @@ Library for urls manipulation.
 
 ---
 
-- [Installation](#installation)
 - [Requirements](#requirements)
-- [Quick Start and Examples](#quick-start-and-examples)
+- [Installation](#installation)
 - [Available Methods](#available-methods)
+- [Quick Start](#quick-start)
 - [Usage](#usage)
 - [Tests](#tests)
 - [TODO](#-todo)
@@ -22,135 +22,424 @@ Library for urls manipulation.
 
 ---
 
-### Installation
+## Requirements
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+This library is supported by **PHP versions 5.6** or higher and is compatible with **HHVM versions 3.0** or higher.
 
-To install PHP Url library, simply:
+## Installation
+
+The preferred way to install this extension is through [Composer](http://getcomposer.org/download/).
+
+To install **PHP Url library**, simply:
 
     $ composer require Josantonius/Url
 
-The previous command will only install the necessary files, if you prefer to download the entire source code (including tests, vendor folder, exceptions not used, docs...) you can use:
+The previous command will only install the necessary files, if you prefer to **download the entire source code** you can use:
 
     $ composer require Josantonius/Url --prefer-source
 
-Or you can also clone the complete repository with Git:
+You can also **clone the complete repository** with Git:
 
-	$ git clone https://github.com/Josantonius/PHP-Url.git
+  $ git clone https://github.com/Josantonius/PHP-Url.git
 
-### Requirements
+Or **install it manually**:
 
-This library is supported by PHP versions 5.6 or higher and is compatible with HHVM versions 3.0 or higher.
+[Download Url.php](https://raw.githubusercontent.com/Josantonius/PHP-Url/master/src/Url.php):
 
-### Quick Start and Examples
+    $ wget https://raw.githubusercontent.com/Josantonius/PHP-Url/master/src/Url.php
 
-To use this class, simply:
-
-```php
-require __DIR__ . '/vendor/autoload.php';
-
-use Josantonius\Url\Url;
-```
-
-### Available Methods
+## Available Methods
 
 Available methods in this library:
 
+### - Get URL from the current page:
+
 ```php
 Url::getCurrentPage();
-Url::getProtocol();
-Url::isSSL();
-Url::getDomain();
-Url::getUri();
-Url::getUriMethods();
-Url::getPort();
-Url::addBackslash();
-Url::previous();
-Url::redirect();
-Url::autoLink();
-Url::generateSafeSlug();
-Url::segmentUri();
-Url::getFirstSegment();
-Url::getLastSegment();
-Url::setUrlParams();
 ```
 
-### Usage
+**# Return** (string) → current URL
 
-Example of use for this library:
+### - Get base URL of the site:
 
 ```php
-<?php
+Url::getBaseUrl();
+```
+
+### - Get protocol from current or passed URL:
+
+```php
+Url::getProtocol($url);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $url | URL from which to obtain protocol. | string | No | false |
+
+**# Return** (string) → http or https
+
+### - Check if it is a secure site (SSL):
+
+```php
+Url::isSSL($url);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $url | URL to check protocol. | string | No | false |
+
+**# Return** (boolean)
+
+### - Get the server name:
+
+```php
+Url::getDomain($url);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $url | URL to get domain. | string | No | false |
+
+**# Return** (string|false) → server name or false
+
+### - Get URI:
+
+```php
+Url::getUri();
+```
+
+**# Return** (string) → path/URL
+
+### - Remove subdirectories from uri if they exist:
+
+```php
+Url::getUriMethods();
+```
+
+**# Return** (string) → method1/method2/method3
+
+### - Set parameters from the url and return url without them:
+
+If a url is received as: http://www.web.com/&key=value&key-2=value params will be saved as GET values and return: http://www.web.com/.
+
+If a url is received as: http://www.web.com/?key=value&key-2=value GET parameters are maintained and return: http://www.web.com/.
+
+```php
+Url::setUrlParams($url);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $url | URL to get params. | string | No | false |
+
+**# Return** (string|false) → URL without parameters
+
+### - Get the server port:
+
+```php
+Url::getPort();
+```
+
+**# Return** (int) → server port
+
+### - Add backslash if it does not exist at the end of the route:
+
+```php
+Url::addBackslash($uri, $position);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $uri | URI when add backslash. | string | Yes | |
+| $position | Place where the backslash is placed: 'top', 'end' or 'both'. | string | No | 'end' |
+
+**# Return** (string) → path/url/ | /path/url | /path/url/
+
+### - Go to the previous url:
+
+```php
+Url::previous();
+```
+
+**# Return** (void)
+
+### - Redirect to chosen url:
+
+```php
+Url::redirect($url);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $url | The URL to redirect. | string | Yes | |
+
+**# Return** (void)
+
+### - Converts plain text urls into HTML links:
+
+Second argument will be used as the url label `<a href=''>$custom</a>`.
+
+```php
+Url::autoLink($url, $custom);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $url | URL where link. | string | Yes | |
+| $custom | If provided, this is used for the link label. | string | No | null |
+
+**# Return** (string) → returns the data with links created around urls
+
+### - This function converts and url segment to an safe one:
+
+For example: `test name @132` will be converted to `test-name--123`.
+
+It will also return all letters in lowercase.
+
+```php
+Url::generateSafeSlug($slug);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $slug | URL slug to clean up. | string | Yes | |
+
+**# Return** (string) → slug
+
+### - Get all url parts based on a / seperator:
+
+```php
+Url::segmentUri($uri);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $uri | URI to segment. | string | No | null |
+
+**# Return** (string) → segments
+
+### - Get first item segment:
+
+```php
+Url::getFirstSegment($segments);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $segments | Segments. | mixed | Yes | |
+
+**# Return** (string) → segment
+
+### - Get last item segment:
+
+```php
+Url::getLastSegment($segments);
+```
+
+| Attribute | Description | Type | Required | Default
+| --- | --- | --- | --- | --- |
+| $segments | Segments. | mixed | Yes | |
+
+**# Return** (string) → segment
+
+## Quick Start
+
+To use this library with **Composer**:
+
+```php
 require __DIR__ . '/vendor/autoload.php';
 
 use Josantonius\Url\Url;
-
-print('<pre>'); 
-
-var_dump(Url::getCurrentPage()); 
-# string(35) "http://site.com:8081/user/login/"
-
-var_dump(Url::getProtocol()); 	 
-# string(4) "http"
-
-var_dump(Url::isSSL()); 		 
-# bool(false)
-
-var_dump(Url::getDomain()); 	 
-# string(9) "site.com"
-
-var_dump(Url::getUri()); 		 
-# string(14) "/user/login/"
-
-var_dump(Url::getPort()); 		 
-# string(4) "8081"
-
-var_dump(Url::addBackslash('path/to/file'));   
-# string(13) "path/to/file/"
-
-var_dump(Url::autoLink('https://github.com')); 
-# string(51) "<a href="https://github.com">https://github.com</a>"
-
-var_dump(Url::autoLink('https://github.com', 'GitHub')); 
-# string(39) "<a href="https://github.com">GitHub</a>"
-
-var_dump(Url::generateSafeSlug('https://github.com')); 
-# string(16) "https-github-com"
-
-var_dump($segments = Url::segmentUri());
-/*
-array(2) {
-  [0]=>
-  string(5) "user"
-  [1]=>
-  string(6) "login"
-}
-*/
-var_dump(Url::getFirstSegment($segments)); 
-# string(5) "user"
-
-var_dump(Url::getLastSegment($segments)); 
-# string(6) "login"
-
-print('</pre>'); 
 ```
 
-### Tests 
+Or If you installed it **manually**, use it:
 
-To run [tests](tests/Url/Test) simply:
+```php
+require_once __DIR__ . '/Url.php';
+
+use Josantonius\Url\Url;
+```
+
+## Usage
+
+Example of use for this library:
+
+### - Get URL from the current page:
+
+```php
+Url::getCurrentPage();
+```
+
+### - Get base URL of the site:
+
+```php
+Url::getBaseUrl();
+```
+
+### - Get protocol from URL:
+
+```php
+Url::getProtocol();
+
+Url::getProtocol('https://josantonius.com/developer/');
+```
+
+### - Check if it is a secure site (SSL):
+
+```php
+Url::isSSL();
+
+Url::isSSL('https://josantonius.com/developer/');
+```
+
+### - Get the server name:
+
+```php
+Url::getDomain();
+
+Url::getDomain('https://josantonius.com/developer/');
+```
+
+### - Get URI:
+
+```php
+Url::getUri();
+```
+
+### - Remove subdirectories from URI if they exist:
+
+```php
+Url::testGetUriMethods();
+```
+
+### - Set parameters from the URL and return URL without them:
+
+```php
+Url::setUrlParams();
+
+Url::setUrlParams('https://josantonius.com?param-1=value&param-2=value');
+
+Url::setUrlParams('https://josantonius.com/&param-1=value&param-2=value');
+```
+
+### - Get the server port:
+
+```php
+Url::getPort();
+```
+
+### - Add backslash if it does not exist at the end of the route:
+
+```php
+Url::addBackslash('https://josantonius.com');
+
+Url::addBackslash('https://josantonius.com', 'end');
+```
+
+### - Add backslash if it does not exist at the top of the route:
+
+```php
+Url::addBackslash('josantonius.com', 'top');
+```
+
+### - Add backslash if it doesn't exist at the top and end of the route:
+
+```php
+Url::addBackslash('josantonius.com', 'both');
+```
+
+### - Go to the previous URL:
+
+```php
+Url::previous();
+```
+
+### - Redirect to chosen URL:
+
+```php
+Url::redirect('https://josantonius.com/');
+```
+
+### - Converts plain text URLS into HTML links:
+
+```php
+Url::autoLink('https://josantonius.com');
+```
+
+### - Converts plain text URLS into HTML links with custom name:
+
+```php
+Url::autoLink('https://josantonius.com', 'Josantonius');
+```
+
+### - Converts and URL segment to an safe one:
+
+```php
+Url::generateSafeSlug('https://josantonius.com');
+```
+
+### - Get all URL parts based on a / seperator:
+
+```php
+Url::segmentUri('/josantonius/developer/');
+```
+
+### - Get first item segment from string:
+
+```php
+Url::getFirstSegment('/josantonius/developer/');
+```
+
+### - Get first item segment from array:
+
+```php
+$segments = ['josantonius', 'developer'];
+
+Url::getLastSegment($segments);
+```
+
+### - Get last item segment from string:
+
+```php
+Url::getLastSegment('/josantonius/developer/');
+```
+
+### - Get last item segment from array:
+
+```php
+$segments = ['josantonius', 'developer'];
+
+Url::getFirstSegment($segments);
+```
+
+## Tests 
+
+To run [tests](tests) you just need [Composer](http://getcomposer.org/download/) and to execute the following:
 
     $ git clone https://github.com/Josantonius/PHP-Url.git
     
     $ cd PHP-Url
 
-    $ phpunit
+    $ composer install
 
-### ☑ TODO
+Run unit tests with [PHPUnit](https://phpunit.de/):
+
+    $ composer phpunit
+
+Run [PSR2](http://www.php-fig.org/psr/psr-2/) code standard tests with [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer):
+
+    $ composer phpcs
+
+Run all previous tests:
+
+    $ composer tests
+
+## ☑ TODO
 
 - [x] Create tests
-- [ ] Improve documentation
+- [x] Improve documentation
 
-### Contribute
+## Contribute
 
 1. Check for open issues or open a new issue to start a discussion around a bug or feature.
 1. Fork the repository on GitHub to start making your changes.
@@ -160,15 +449,15 @@ To run [tests](tests/Url/Test) simply:
 
 This is intended for large and long-lived objects.
 
-### Repository
+## Repository
 
 All files in this repository were created and uploaded automatically with [Reposgit Creator](https://github.com/Josantonius/BASH-Reposgit).
 
-### License
+## License
 
 This project is licensed under **MIT license**. See the [LICENSE](LICENSE) file for more info.
 
-### Copyright
+## Copyright
 
 2017 Josantonius, [josantonius.com](https://josantonius.com/)
 

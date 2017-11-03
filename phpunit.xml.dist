@@ -6,11 +6,12 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
+         strict="true"
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="tests/bootstrap.php"
->
+         bootstrap="vendor/autoload.php">
+
     <php>
         <server name='SERVER_PROTOCOL' value='HTTP/1.1' />
         <server name='HTTPS'           value='on' />
@@ -20,15 +21,16 @@
         <server name='SERVER_PORT'     value='80' />
         <server name='HTTP_REFERER'    value='https://www.google.es/' />
     </php>
+
     <testsuites>
-        <testsuite name="Url Test Suite">
-            <directory>tests/Url</directory>
+        <testsuite name="Test Suite">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>src/Url</directory>
+            <directory>src</directory>
         </whitelist>
     </filter>
 </phpunit>

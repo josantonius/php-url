@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## 1.1.6 - 2017-11-02
+
+* Implemented `PSR-4 autoloader standard` from all library files.
+
+* Implemented `PSR-2 coding standard` from all library PHP files.
+
+* Implemented `PHPCS` to ensure that PHP code complies with `PSR2` code standards.
+
+* Implemented `Codacy` to automates code reviews and monitors code quality over time.
+
+* Implemented `Codecov` to coverage reports.
+
+* Added `Url/phpcs.ruleset.xml` file.
+
+* Deleted `Url/src/bootstrap.php` file.
+
+* Deleted `Url/tests/bootstrap.php` file.
+
+* Deleted `Url/vendor` folder.
+
+* Changed `Josantonius\Url\Test\UrlTest` class to  `Josantonius\Url\UrlTest` class.
+
 ## 1.1.5 - 2017-09-17
 
 * Unit tests supported by `PHPUnit` were added.
