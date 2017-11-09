@@ -8,7 +8,6 @@
  * @link       https://github.com/Josantonius/PHP-Url
  * @since      1.1.5
  */
-
 namespace Josantonius\Url;
 
 use PHPUnit\Framework\TestCase;
@@ -18,14 +17,44 @@ use PHPUnit\Framework\TestCase;
  *
  * @since 1.1.5
  */
-class UrlTest extends TestCase
+final class UrlTest extends TestCase
 {
+    /**
+     * Url instance.
+     *
+     * @since 1.1.7
+     *
+     * @var object
+     */
+    protected $Url;
+
+    /**
+     * Set up.
+     *
+     * @since 1.1.7
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->Url = new Url;
+    }
+
+    /**
+     * Check if it is an instance of Url.
+     *
+     * @since 1.1.7
+     */
+    public function testIsInstanceOfUrl()
+    {
+        $actual = $this->Url;
+        $this->assertInstanceOf('Josantonius\Url\Url', $actual);
+    }
+
     /**
      * Get url from the current page.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetCurrentPage()
     {
@@ -39,8 +68,6 @@ class UrlTest extends TestCase
      * Get base url of the site.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetBaseUrl()
     {
@@ -54,8 +81,6 @@ class UrlTest extends TestCase
      * Get the protocol from the url.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetProtocol()
     {
@@ -69,8 +94,6 @@ class UrlTest extends TestCase
      * Check if it is a secure site (SSL).
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testIsSSL()
     {
@@ -81,8 +104,6 @@ class UrlTest extends TestCase
      * Get the server name.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetDomain()
     {
@@ -96,8 +117,6 @@ class UrlTest extends TestCase
      * Get uri.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetUri()
     {
@@ -111,8 +130,6 @@ class UrlTest extends TestCase
      * Remove subdirectories from uri if they exist.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetUriMethods()
     {
@@ -126,8 +143,6 @@ class UrlTest extends TestCase
      * Set parameters from the url and return url without them.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testSetUrlParams()
     {
@@ -143,8 +158,6 @@ class UrlTest extends TestCase
      * Set parameters from the url and return url without them.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testSetUrlParamsAlternativeVersion()
     {
@@ -160,8 +173,6 @@ class UrlTest extends TestCase
      * Get the server port.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetPort()
     {
@@ -175,8 +186,6 @@ class UrlTest extends TestCase
      * Add backslash if it does not exist at the end of the route.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testAddBackslashEnd()
     {
@@ -190,8 +199,6 @@ class UrlTest extends TestCase
      * Add backslash if it does not exist at the end of the route.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testAddBackslashEndAlternativeVersion()
     {
@@ -205,8 +212,6 @@ class UrlTest extends TestCase
      * Add backslash if it does not exist at the top of the route.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testAddBackslashTop()
     {
@@ -220,8 +225,6 @@ class UrlTest extends TestCase
      * Add backslash if it doesn't exist at the top and end of the route.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testAddBackslashBoth()
     {
@@ -237,8 +240,6 @@ class UrlTest extends TestCase
      * @runInSeparateProcess
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testPrevious()
     {
@@ -251,8 +252,6 @@ class UrlTest extends TestCase
      * @runInSeparateProcess
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testRedirect()
     {
@@ -263,8 +262,6 @@ class UrlTest extends TestCase
      * Converts plain text urls into HTML links.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testAutoLink()
     {
@@ -278,8 +275,6 @@ class UrlTest extends TestCase
      * Converts plain text urls into HTML links with custom name.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testCustomAutoLink()
     {
@@ -293,8 +288,6 @@ class UrlTest extends TestCase
      * Converts and url segment to an safe one.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGenerateSafeSlug()
     {
@@ -308,8 +301,6 @@ class UrlTest extends TestCase
      * Get all url parts based on a / seperator.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testSegment()
     {
@@ -323,8 +314,6 @@ class UrlTest extends TestCase
      * Get first item segment from string.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetFirstSegmentFromString()
     {
@@ -338,8 +327,6 @@ class UrlTest extends TestCase
      * Get first item segment from array.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetFirstSegmentFromArray()
     {
@@ -355,8 +342,6 @@ class UrlTest extends TestCase
      * Get last item segment from string.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetLastSegmentFromString()
     {
@@ -370,8 +355,6 @@ class UrlTest extends TestCase
      * Get last item segment from array.
      *
      * @since 1.1.5
-     *
-     * @return void
      */
     public function testGetLastSegmentFromArray()
     {

@@ -9,7 +9,6 @@
  * @link       https://github.com/Josantonius/PHP-Url
  * @since      1.0.0
  */
-
 namespace Josantonius\Url;
 
 /**
@@ -29,10 +28,10 @@ class Url
     public static function getCurrentPage()
     {
         $protocol = self::getProtocol();
-        $host     = self::getDomain();
-        $port     = ':' . self::getPort();
-        $port     = (($port == ':80') || ($port == ':443')) ? '' : $port;
-        $uri      = self::getUri();
+        $host = self::getDomain();
+        $port = ':' . self::getPort();
+        $port = (($port == ':80') || ($port == ':443')) ? '' : $port;
+        $uri = self::getUri();
 
         return $protocol . '://' . $host . $port . $uri;
     }
@@ -86,11 +85,11 @@ class Url
      *
      * @param string $url
      *
-     * @return boolean
+     * @return bool
      */
     public static function isSSL($url = false)
     {
-        return (self::getProtocol($url) === 'https');
+        return self::getProtocol($url) === 'https';
     }
 
     /**
@@ -106,6 +105,7 @@ class Url
     {
         if ($url) {
             preg_match('/([\w]+[.]){1,}[a-z]+/', $url, $matches);
+
             return isset($matches[0]) ? $matches[0] : false;
         }
 
@@ -133,8 +133,9 @@ class Url
      */
     public static function getUriMethods()
     {
-        $root = str_replace($_SERVER["DOCUMENT_ROOT"], '', getcwd());
+        $root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd());
         $subfolder = trim($root, '/');
+
         return trim(str_replace($subfolder, '', self::getUri()), '/');
     }
 
@@ -158,7 +159,7 @@ class Url
         $url = $url ?: self::getCurrentPage();
 
         if (strpos($url, '?') == false && strpos($url, '&') != false) {
-            $url   = preg_replace('/&/', '?', $url, 1);
+            $url = preg_replace('/&/', '?', $url, 1);
             $parts = parse_url($url);
             $query = isset($parts['query']) ? $parts['query'] : '';
 
@@ -201,13 +202,12 @@ class Url
         switch ($position) {
             case 'top':
                 return (substr($uri, 1) === '/') ? $uri : '/' . $uri;
-
             case 'end':
                 return (substr($uri, -1) === '/') ? $uri : $uri . '/';
-
             case 'both':
                 $uri = self::addBackslash($uri, 'top');
                 $uri = self::addBackslash($uri, 'end');
+
                 return $uri;
         }
     }
@@ -216,8 +216,6 @@ class Url
      * Go to the previous URL.
      *
      * @since 1.0.0
-     *
-     * @return void
      */
     public static function previous()
     {
@@ -230,9 +228,7 @@ class Url
      *
      * @since 1.0.0
      *
-     * @param  string  $url → the URL to redirect
-     *
-     * @return void
+     * @param string $url → the URL to redirect
      */
     public static function redirect($url)
     {
@@ -246,8 +242,8 @@ class Url
      *
      * @since 1.0.0
      *
-     * @param  string $url    → URL
-     * @param  string $custom → if provided, this is used for the link label
+     * @param string $url    → URL
+     * @param string $custom → if provided, this is used for the link label
      *
      * @return string → returns the data with links created around URLS
      */
@@ -289,13 +285,13 @@ class Url
      *
      * @since 1.1.5
      *
-     * @param  string $uri → URI to segment
+     * @param string $uri → URI to segment
      *
      * @return string → segments
      */
     public static function segmentUri($uri = null)
     {
-        $uri = (!is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
+        $uri = (! is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
 
         return explode('/', trim($uri, '/'));
     }
