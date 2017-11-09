@@ -206,7 +206,7 @@ Url::generateSafeSlug($slug);
 
 **# Return** (string) → slug
 
-### - Obtener todas las partes de url basadas en un / seperador:
+### - Obtener todas las partes de url basadas en un / separador:
 
 ```php
 Url::segmentUri($uri);
@@ -306,13 +306,13 @@ Url::getDomain('https://josantonius.com/developer/');
 Url::getUri();
 ```
 
-### - Remove subdirectories from URI if they exist:
+### - Obtener URI sin subdirectorios si es que existen:
 
 ```php
-Url::testGetUriMethods();
+Url::getUriMethods();
 ```
 
-### - Set parameters from the URL and return URL without them:
+### - Guardar parámetros GET encontrados en la URL y devolverla sin ellos:
 
 ```php
 Url::setUrlParams();
@@ -378,7 +378,7 @@ Url::autoLink('https://josantonius.com', 'Josantonius');
 Url::generateSafeSlug('https://josantonius.com');
 ```
 
-### - Obtener todas las partes de URL basadas en un / seperador:
+### - Obtener todas las partes de URL basadas en un / separador:
 
 ```php
 Url::segmentUri('/josantonius/developer/');
