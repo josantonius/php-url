@@ -45,14 +45,14 @@ class Url
      */
     public static function getBaseUrl()
     {
-        $uri = self::addBackslash(self::getUriMethods(), 'both');
-        $url = self::addBackslash(self::getCurrentPage());
+        $uri = self::addBackSlash(self::getUriMethods(), 'both');
+        $url = self::addBackSlash(self::getCurrentPage());
 
         if ($uri !== '/') {
             $url = trim(str_replace($uri, '', $url), '/');
         }
 
-        return self::addBackslash($url);
+        return self::addBackSlash($url);
     }
 
     /**
@@ -197,19 +197,24 @@ class Url
      *
      * @return string → path/url/ | /path/url | /path/url/
      */
-    public static function addBackslash($uri, $position = 'end')
+    public static function addBackSlash($uri, $position = 'end')
     {
         switch ($position) {
             case 'top':
-                return (substr($uri, 1) === '/') ? $uri : '/' . $uri;
+                $uri = (substr($uri, 1) === '/') ? $uri : '/' . $uri;
+                break;
             case 'end':
-                return (substr($uri, -1) === '/') ? $uri : $uri . '/';
+                $uri = (substr($uri, -1) === '/') ? $uri : $uri . '/';
+                break;
             case 'both':
-                $uri = self::addBackslash($uri, 'top');
-                $uri = self::addBackslash($uri, 'end');
-
-                return $uri;
+                $uri = self::addBackSlash($uri, 'top');
+                $uri = self::addBackSlash($uri, 'end');
+                break;
+            default:
+                $uri = false;
         }
+
+        return $uri;
     }
 
     /**
