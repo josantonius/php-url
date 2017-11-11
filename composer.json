@@ -58,7 +58,8 @@
         "phpmd": "vendor/bin/phpmd src,tests text ./phpmd.xml",
         "fix": [
             "vendor/bin/php-cs-fixer fix -v",
-            "vendor/bin/phpcbf src,tests"
+            "vendor/bin/phpcbf src",
+            "vendor/bin/phpcbf tests"
         ],
         "tests": [
             "clear",
