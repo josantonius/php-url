@@ -195,20 +195,19 @@ class Url
      * @param string $uri      → URI
      * @param string $position → place where the backslash is placed
      *
-     * @return string → path/url/ | /path/url | /path/url/
+     * @return string|false → path/url/ | /path/url | /path/url/
      */
     public static function addBackSlash($uri, $position = 'end')
     {
         switch ($position) {
             case 'top':
-                $uri = (substr($uri, 1) === '/') ? $uri : '/' . $uri;
+                $uri = '/' . ltrim($uri . '/');
                 break;
             case 'end':
-                $uri = (substr($uri, -1) === '/') ? $uri : $uri . '/';
+                $uri = rtrim($uri . '/') . '/';
                 break;
             case 'both':
-                $uri = self::addBackSlash($uri, 'top');
-                $uri = self::addBackSlash($uri, 'end');
+                $uri = '/' . trim($uri . '/') . '/';
                 break;
             default:
                 $uri = false;

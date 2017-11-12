@@ -142,18 +142,21 @@ Url::getPort();
 
 **# Return** (int) → server port
 
-### - Add backslash if it does not exist at the end of the route:
+### - Add back slash if it does not exist at the end of the route:
+
 
 ```php
-Url::addBackslash($uri, $position);
+Url::addBackSlash($uri, $position);
 ```
+
+This method will remove all slashes that are in the indicated position before adding them. E. g. ```addBackSlash('sample///',' both');``` will return ```/sample/```.
 
 | Attribute | Description | Type | Required | Default
 | --- | --- | --- | --- | --- |
-| $uri | URI when add backslash. | string | Yes | |
-| $position | Place where the backslash is placed: 'top', 'end' or 'both'. | string | No | 'end' |
+| $uri | URI when add back slash. | string | Yes | |
+| $position | Place where the back slash is placed: 'top', 'end' or 'both'. | string | No | 'end' |
 
-**# Return** (string) → path/url/ | /path/url | /path/url/
+**# Return** (string|false) → path/url/ | /path/url | /path/url/ or false if a correct type is not entered.
 
 ### - Go to the previous url:
 
@@ -328,24 +331,24 @@ Url::setUrlParams('https://josantonius.com/&param-1=value&param-2=value');
 Url::getPort();
 ```
 
-### - Add backslash if it does not exist at the end of the route:
+### - Add back slash if it does not exist at the end of the route:
 
 ```php
-Url::addBackslash('https://josantonius.com');
+Url::addBackSlash('https://josantonius.com');
 
-Url::addBackslash('https://josantonius.com', 'end');
+Url::addBackSlash('https://josantonius.com', 'end');
 ```
 
-### - Add backslash if it does not exist at the top of the route:
+### - Add back slash if it does not exist at the top of the route:
 
 ```php
-Url::addBackslash('josantonius.com', 'top');
+Url::addBackSlash('josantonius.com', 'top');
 ```
 
-### - Add backslash if it doesn't exist at the top and end of the route:
+### - Add back slash if it doesn't exist at the top and end of the route:
 
 ```php
-Url::addBackslash('josantonius.com', 'both');
+Url::addBackSlash('josantonius.com', 'both');
 ```
 
 ### - Go to the previous URL:

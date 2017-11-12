@@ -144,8 +144,10 @@ Url::getPort();
 
 ### - Añadir barra inversa si no existe al final de la ruta:
 
+Este método eliminará todas las barras que estén en la posición indicada antes de añadirla. Por ejemplo: ```addBackSlash('sample///','both');``` retornará ```/sample/```.
+
 ```php
-Url::addBackslash($uri, $position);
+Url::addBackSlash($uri, $position);
 ```
 
 | Atributo | Descripción | Tipo | Requerido | Predeterminado
@@ -153,7 +155,7 @@ Url::addBackslash($uri, $position);
 | $uri | URI donde añadir barra invertida. | string | Sí | |
 | $position | Lugar donde colocar la barra invertida: 'top', 'end' or 'both'. | string | No | 'end' |
 
-**# Return** (string) → path/url/ | /path/url | /path/url/
+**# Return** (string|false) → path/url/ | /path/url | /path/url/ o falso si no se indica una posición correcta.
 
 ### - Ir a la url anterior:
 
@@ -331,21 +333,21 @@ Url::getPort();
 ### - Añadir barra inversa si no existe al final de la ruta:
 
 ```php
-Url::addBackslash('https://josantonius.com');
+Url::addBackSlash('https://josantonius.com');
 
-Url::addBackslash('https://josantonius.com', 'end');
+Url::addBackSlash('https://josantonius.com', 'end');
 ```
 
 ### - Añadir barra inversa si no existe al principio de la ruta:
 
 ```php
-Url::addBackslash('josantonius.com', 'top');
+Url::addBackSlash('josantonius.com', 'top');
 ```
 
 ### - Añadir barra inversa si no existe al principio y al final de la ruta:
 
 ```php
-Url::addBackslash('josantonius.com', 'both');
+Url::addBackSlash('josantonius.com', 'both');
 ```
 
 ### - Ir a la URL anterior:

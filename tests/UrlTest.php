@@ -93,7 +93,7 @@ final class UrlTest extends TestCase
     /**
      * Get the protocol from the url if getProtocol pass the url.
      *
-     * @since 1.1.5
+     * @since 1.1.8
      */
     public function testGetProtocolWithUrl()
     {
@@ -131,7 +131,7 @@ final class UrlTest extends TestCase
     /**
      * Get the server name if getDomain pass the domain.
      *
-     * @since 1.1.5
+     * @since 1.1.8
      */
     public function testGetDomainWithDomain()
     {
@@ -144,7 +144,7 @@ final class UrlTest extends TestCase
     /**
      * Get the false if getDomain pass the invalid domain.
      *
-     * @since 1.1.5
+     * @since 1.1.8
      */
     public function testGetDomainWithInvalidDomain()
     {
@@ -275,7 +275,7 @@ final class UrlTest extends TestCase
     /**
      * Add backslash if it is the default case.
      *
-     * @since 1.1.5
+     * @since 1.1.8
      */
     public function testAddBackSlashDefault()
     {
