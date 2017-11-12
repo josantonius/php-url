@@ -91,6 +91,19 @@ final class UrlTest extends TestCase
     }
 
     /**
+     * Get the protocol from the url if getProtocol pass the url.
+     *
+     * @since 1.1.5
+     */
+    public function testGetProtocolWithUrl()
+    {
+        $this->assertContains(
+            'https',
+            Url::getProtocol('https://josantonius.com/')
+        );
+    }
+
+    /**
      * Check if it is a secure site (SSL).
      *
      * @since 1.1.5
@@ -111,6 +124,31 @@ final class UrlTest extends TestCase
             'josantonius.com',
             Url::getDomain()
         );
+
+        $this->assertFalse(Url::getDomain('josantonius'));
+    }
+
+    /**
+     * Get the server name if getDomain pass the domain.
+     *
+     * @since 1.1.5
+     */
+    public function testGetDomainWithDomain()
+    {
+        $this->assertContains(
+            'josantonius.com',
+            Url::getDomain('josantonius.com')
+        );
+    }
+
+    /**
+     * Get the false if getDomain pass the invalid domain.
+     *
+     * @since 1.1.5
+     */
+    public function testGetDomainWithInvalidDomain()
+    {
+        $this->assertFalse(Url::getDomain('josantonius'));
     }
 
     /**
@@ -187,11 +225,11 @@ final class UrlTest extends TestCase
      *
      * @since 1.1.5
      */
-    public function testAddBackslashEnd()
+    public function testAddBackSlashEnd()
     {
         $this->assertContains(
             'https://josantonius.com/',
-            Url::addBackslash('https://josantonius.com')
+            Url::addBackSlash('https://josantonius.com')
         );
     }
 
@@ -200,11 +238,11 @@ final class UrlTest extends TestCase
      *
      * @since 1.1.5
      */
-    public function testAddBackslashEndAlternativeVersion()
+    public function testAddBackSlashEndAlternativeVersion()
     {
         $this->assertContains(
             'https://josantonius.com/',
-            Url::addBackslash('https://josantonius.com', 'end')
+            Url::addBackSlash('https://josantonius.com', 'end')
         );
     }
 
@@ -213,11 +251,11 @@ final class UrlTest extends TestCase
      *
      * @since 1.1.5
      */
-    public function testAddBackslashTop()
+    public function testAddBackSlashTop()
     {
         $this->assertContains(
             '/josantonius.com',
-            Url::addBackslash('josantonius.com', 'top')
+            Url::addBackSlash('josantonius.com', 'top')
         );
     }
 
@@ -226,12 +264,22 @@ final class UrlTest extends TestCase
      *
      * @since 1.1.5
      */
-    public function testAddBackslashBoth()
+    public function testAddBackSlashBoth()
     {
         $this->assertContains(
             '/josantonius.com/',
-            Url::addBackslash('josantonius.com', 'both')
+            Url::addBackSlash('josantonius.com', 'both')
         );
+    }
+
+    /**
+     * Add backslash if it is the default case.
+     *
+     * @since 1.1.5
+     */
+    public function testAddBackSlashDefault()
+    {
+        $this->assertFalse(Url::addBackSlash('josantonius.com', 'default'));
     }
 
     /**
