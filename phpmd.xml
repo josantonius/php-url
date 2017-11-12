@@ -12,7 +12,7 @@
     <rule ref="rulesets/codesize.xml/ExcessiveParameterList"/>
     <rule ref="rulesets/codesize.xml/ExcessivePublicCount"/>
     <rule ref="rulesets/codesize.xml/TooManyFields"/>
-    <rule ref="rulesets/codesize.xml/TooManyMethods"/>
+    <!--<rule ref="rulesets/codesize.xml/TooManyMethods"/>-->
     <!--design-->
     <rule ref="rulesets/design.xml/EvalExpression"/>
     <!--<rule ref="rulesets/design.xml/ExitExpression"/>-->
