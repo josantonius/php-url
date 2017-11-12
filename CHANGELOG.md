@@ -6,10 +6,10 @@
 * Change the `addBackslash` method to `addBackSlash` method and refactorize.
 * Fix command in composer.json will output the ERROR: The file "src,tests" does not exist. Change this to the `vendor/bin/phpcbf src tests` command.
 
-* Deleted `Josantonius\Url\Tests\UrlTest::testGetProtocolWithUrl()` method.
-* Deleted `Josantonius\Url\Tests\UrlTest::testGetDomainWithDomain()` method.
-* Deleted `Josantonius\Url\Tests\UrlTest::testGetDomainWithInvalidDomain()` method.
-* Deleted `Josantonius\Url\Tests\UrlTest::testAddBackSlashDefault()` method.
+* Added `Josantonius\Url\Tests\UrlTest::testGetProtocolWithUrl()` method.
+* Added `Josantonius\Url\Tests\UrlTest::testGetDomainWithDomain()` method.
+* Added `Josantonius\Url\Tests\UrlTest::testGetDomainWithInvalidDomain()` method.
+* Added `Josantonius\Url\Tests\UrlTest::testAddBackSlashDefault()` method.
 
 ## 1.1.7 - 2017-11-09
 
