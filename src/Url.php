@@ -183,13 +183,13 @@ class Url
     {
         switch ($position) {
             case 'top':
-                $uri = '/' . ltrim($uri . '/');
+                $uri = '/' . ltrim($uri, '/');
                 break;
             case 'end':
-                $uri = rtrim($uri . '/') . '/';
+                $uri = rtrim($uri, '/') . '/';
                 break;
             case 'both':
-                $uri = '/' . trim($uri . '/') . '/';
+                $uri = '/' . trim($uri, '/') . '/';
                 break;
             default:
                 $uri = false;
