@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.9 - 2018-01-07
+
+* The tests were fixed.
+
+* Changes in documentation.
+
 ## 1.1.8 - 2017-11-12
 
 * Do more testings.

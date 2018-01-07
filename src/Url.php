@@ -2,26 +2,22 @@
 /**
  * Library for urls manipulation.
  *
- * @author     Josantonius - hello@josantonius.com
- * @author     David Carr  - dave@simplemvcframework.com
- * @copyright  Copyright (c) 2017
- * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @link       https://github.com/Josantonius/PHP-Url
- * @since      1.0.0
+ * @author    Josantonius - hello@josantonius.com
+ * @author    David Carr  - dave@simplemvcframework.com
+ * @copyright 2017 - 2018 (c) Josantonius - PHP-Url
+ * @license   https://opensource.org/licenses/MIT - The MIT License (MIT)
+ * @link      https://github.com/Josantonius/PHP-Url
+ * @since     1.0.0
  */
 namespace Josantonius\Url;
 
 /**
  * URL handler.
- *
- * @since 1.0.0
  */
 class Url
 {
     /**
      * Get URL from the current page.
-     *
-     * @since 1.0.0
      *
      * @return string → URL
      */
@@ -58,8 +54,6 @@ class Url
     /**
      * Get protocol from current or passed URL.
      *
-     * @since 1.0.0
-     *
      * @param string $url
      *
      * @return string → http|https
@@ -81,8 +75,6 @@ class Url
     /**
      * Check if it is a secure site (SSL).
      *
-     * @since 1.0.0
-     *
      * @param string $url
      *
      * @return bool
@@ -94,8 +86,6 @@ class Url
 
     /**
      * Get the server name.
-     *
-     * @since 1.0.0
      *
      * @param string $url
      *
@@ -115,8 +105,6 @@ class Url
     /**
      * Get URI.
      *
-     * @since 1.0.0
-     *
      * @return string → path/URL
      */
     public static function getUri()
@@ -126,8 +114,6 @@ class Url
 
     /**
      * Remove subdirectories from URI if they exist.
-     *
-     * @since 1.0.0
      *
      * @return string → method1/method2/method3
      */
@@ -178,8 +164,6 @@ class Url
     /**
      * Get the server port.
      *
-     * @since 1.0.0
-     *
      * @return int → server port
      */
     public static function getPort()
@@ -189,8 +173,6 @@ class Url
 
     /**
      * Add backslash if it does not exist at the end of the route.
-     *
-     * @since 1.0.0
      *
      * @param string $uri      → URI
      * @param string $position → place where the backslash is placed
@@ -218,8 +200,6 @@ class Url
 
     /**
      * Go to the previous URL.
-     *
-     * @since 1.0.0
      */
     public static function previous()
     {
@@ -229,8 +209,6 @@ class Url
 
     /**
      * Redirect to chosen URL.
-     *
-     * @since 1.0.0
      *
      * @param string $url → the URL to redirect
      */
@@ -243,8 +221,6 @@ class Url
     /**
      * Converts plain text URLS into HTML links.
      * Second argument will be used as the URL label <a href=''>$custom</a>.
-     *
-     * @since 1.0.0
      *
      * @param string $url    → URL
      * @param string $custom → if provided, this is used for the link label
@@ -268,8 +244,6 @@ class Url
      * This function converts and URL segment to an safe one.
      * For example: `test name @132` will be converted to `test-name--123`.
      * It will also return all letters in lowercase
-     *
-     * @since 1.0.0
      *
      * @param string $slug → URL slug to clean up
      *
@@ -303,8 +277,6 @@ class Url
     /**
      * Get first item segment.
      *
-     * @since 1.0.0
-     *
      * @return string → segment
      */
     public static function getFirstSegment($segments)
@@ -316,8 +288,6 @@ class Url
 
     /**
      * Get last item segment.
-     *
-     * @since 1.0.0
      *
      * @return string → segment
      */

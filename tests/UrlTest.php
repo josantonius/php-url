@@ -2,11 +2,11 @@
 /**
  * Library for urls manipulation.
  *
- * @author     Josantonius - hello@josantonius.com
- * @copyright  Copyright (c) 2017
- * @license    https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @link       https://github.com/Josantonius/PHP-Url
- * @since      1.1.5
+ * @author    Josantonius - <hello@josantonius.com>
+ * @copyright 2017 - 2018 (c) Josantonius - PHP-Url
+ * @license   https://opensource.org/licenses/MIT - The MIT License (MIT)
+ * @link      https://github.com/Josantonius/PHP-Url
+ * @since     1.1.5
  */
 namespace Josantonius\Url;
 
@@ -14,8 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Tests class for Url library.
- *
- * @since 1.1.5
  */
 final class UrlTest extends TestCase
 {
@@ -47,46 +45,45 @@ final class UrlTest extends TestCase
      */
     public function testIsInstanceOfUrl()
     {
-        $actual = $this->Url;
-        $this->assertInstanceOf('Josantonius\Url\Url', $actual);
+        $this->assertInstanceOf('Josantonius\Url\Url', $this->Url);
     }
 
     /**
      * Get url from the current page.
-     *
-     * @since 1.1.5
      */
     public function testGetCurrentPage()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https://josantonius.com/developer/',
-            Url::getCurrentPage()
+            $url::getCurrentPage()
         );
     }
 
     /**
      * Get base url of the site.
-     *
-     * @since 1.1.5
      */
     public function testGetBaseUrl()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https://josantonius.com/',
-            Url::getBaseUrl()
+            $url::getBaseUrl()
         );
     }
 
     /**
      * Get the protocol from the url.
-     *
-     * @since 1.1.5
      */
     public function testGetProtocol()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https',
-            Url::getProtocol()
+            $url::getProtocol()
         );
     }
 
@@ -97,35 +94,37 @@ final class UrlTest extends TestCase
      */
     public function testGetProtocolWithUrl()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https',
-            Url::getProtocol('https://josantonius.com/')
+            $url::getProtocol('https://josantonius.com/')
         );
     }
 
     /**
      * Check if it is a secure site (SSL).
-     *
-     * @since 1.1.5
      */
     public function testIsSSL()
     {
-        $this->assertTrue(Url::isSSL());
+        $url = $this->Url;
+
+        $this->assertTrue($url::isSSL());
     }
 
     /**
      * Get the server name.
-     *
-     * @since 1.1.5
      */
     public function testGetDomain()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'josantonius.com',
-            Url::getDomain()
+            $url::getDomain()
         );
 
-        $this->assertFalse(Url::getDomain('josantonius'));
+        $this->assertFalse($url::getDomain('josantonius'));
     }
 
     /**
@@ -135,9 +134,11 @@ final class UrlTest extends TestCase
      */
     public function testGetDomainWithDomain()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'josantonius.com',
-            Url::getDomain('josantonius.com')
+            $url::getDomain('josantonius.com')
         );
     }
 
@@ -148,45 +149,47 @@ final class UrlTest extends TestCase
      */
     public function testGetDomainWithInvalidDomain()
     {
-        $this->assertFalse(Url::getDomain('josantonius'));
+        $url = $this->Url;
+
+        $this->assertFalse($url::getDomain('josantonius'));
     }
 
     /**
      * Get uri.
-     *
-     * @since 1.1.5
      */
     public function testGetUri()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             '/developer/',
-            Url::getUri()
+            $url::getUri()
         );
     }
 
     /**
      * Remove subdirectories from uri if they exist.
-     *
-     * @since 1.1.5
      */
     public function testGetUriMethods()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'developer',
-            Url::getUriMethods()
+            $url::getUriMethods()
         );
     }
 
     /**
      * Set parameters from the url and return url without them.
-     *
-     * @since 1.1.5
      */
     public function testSetUrlParams()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https://josantonius.com',
-            Url::setUrlParams(
+            $url::setUrlParams(
                 'https://josantonius.com?param-1=value&param-2=value'
             )
         );
@@ -194,14 +197,14 @@ final class UrlTest extends TestCase
 
     /**
      * Set parameters from the url and return url without them.
-     *
-     * @since 1.1.5
      */
     public function testSetUrlParamsAlternativeVersion()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https://josantonius.com/',
-            Url::setUrlParams(
+            $url::setUrlParams(
                 'https://josantonius.com/&param-1=value&param-2=value'
             )
         );
@@ -209,66 +212,66 @@ final class UrlTest extends TestCase
 
     /**
      * Get the server port.
-     *
-     * @since 1.1.5
      */
     public function testGetPort()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             '80',
-            Url::getPort()
+            $url::getPort()
         );
     }
 
     /**
      * Add backslash if it does not exist at the end of the route.
-     *
-     * @since 1.1.5
      */
     public function testAddBackSlashEnd()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https://josantonius.com/',
-            Url::addBackSlash('https://josantonius.com')
+            $url::addBackSlash('https://josantonius.com')
         );
     }
 
     /**
      * Add backslash if it does not exist at the end of the route.
-     *
-     * @since 1.1.5
      */
     public function testAddBackSlashEndAlternativeVersion()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https://josantonius.com/',
-            Url::addBackSlash('https://josantonius.com', 'end')
+            $url::addBackSlash('https://josantonius.com', 'end')
         );
     }
 
     /**
      * Add backslash if it does not exist at the top of the route.
-     *
-     * @since 1.1.5
      */
     public function testAddBackSlashTop()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             '/josantonius.com',
-            Url::addBackSlash('josantonius.com', 'top')
+            $url::addBackSlash('josantonius.com', 'top')
         );
     }
 
     /**
      * Add backslash if it doesn't exist at the top and end of the route.
-     *
-     * @since 1.1.5
      */
     public function testAddBackSlashBoth()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             '/josantonius.com/',
-            Url::addBackSlash('josantonius.com', 'both')
+            $url::addBackSlash('josantonius.com', 'both')
         );
     }
 
@@ -279,138 +282,140 @@ final class UrlTest extends TestCase
      */
     public function testAddBackSlashDefault()
     {
-        $this->assertFalse(Url::addBackSlash('josantonius.com', 'default'));
+        $url = $this->Url;
+
+        $this->assertFalse($url::addBackSlash('josantonius.com', 'default'));
     }
 
     /**
      * Go to the previous url.
      *
      * @runInSeparateProcess
-     *
-     * @since 1.1.5
      */
     public function testPrevious()
     {
-        Url::previous();
+        $url = $this->Url;
+
+        $url::previous();
     }
 
     /**
      * Redirect to chosen url.
      *
      * @runInSeparateProcess
-     *
-     * @since 1.1.5
      */
     public function testRedirect()
     {
-        Url::redirect('https://josantonius.com/');
+        $url = $this->Url;
+
+        $url::redirect('https://josantonius.com/');
     }
 
     /**
      * Converts plain text urls into HTML links.
-     *
-     * @since 1.1.5
      */
     public function testAutoLink()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             '<a href="https://josantonius.com">https://josantonius.com</a>',
-            Url::autoLink('https://josantonius.com')
+            $url::autoLink('https://josantonius.com')
         );
     }
 
     /**
      * Converts plain text urls into HTML links with custom name.
-     *
-     * @since 1.1.5
      */
     public function testCustomAutoLink()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             '<a href="https://josantonius.com">Josantonius</a>',
-            Url::autoLink('https://josantonius.com', 'Josantonius')
+            $url::autoLink('https://josantonius.com', 'Josantonius')
         );
     }
 
     /**
      * Converts and url segment to an safe one.
-     *
-     * @since 1.1.5
      */
     public function testGenerateSafeSlug()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'https-josantonius-com',
-            Url::generateSafeSlug('https://josantonius.com')
+            $url::generateSafeSlug('https://josantonius.com')
         );
     }
 
     /**
      * Get all url parts based on a / seperator.
-     *
-     * @since 1.1.5
      */
     public function testSegment()
     {
+        $url = $this->Url;
+
         $this->assertCount(
             2,
-            Url::segmentUri('/josantonius/developer/')
+            $url::segmentUri('/josantonius/developer/')
         );
     }
 
     /**
      * Get first item segment from string.
-     *
-     * @since 1.1.5
      */
     public function testGetFirstSegmentFromString()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'josantonius',
-            Url::getFirstSegment('/josantonius/developer/')
+            $url::getFirstSegment('/josantonius/developer/')
         );
     }
 
     /**
      * Get first item segment from array.
-     *
-     * @since 1.1.5
      */
     public function testGetFirstSegmentFromArray()
     {
+        $url = $this->Url;
+
         $segments = ['josantonius', 'developer'];
 
         $this->assertContains(
             'josantonius',
-            Url::getFirstSegment($segments)
+            $url::getFirstSegment($segments)
         );
     }
 
     /**
      * Get last item segment from string.
-     *
-     * @since 1.1.5
      */
     public function testGetLastSegmentFromString()
     {
+        $url = $this->Url;
+
         $this->assertContains(
             'developer',
-            Url::getLastSegment('/josantonius/developer/')
+            $url::getLastSegment('/josantonius/developer/')
         );
     }
 
     /**
      * Get last item segment from array.
-     *
-     * @since 1.1.5
      */
     public function testGetLastSegmentFromArray()
     {
+        $url = $this->Url;
+
         $segments = ['josantonius', 'developer'];
 
         $this->assertContains(
             'developer',
-            Url::getLastSegment($segments)
+            $url::getLastSegment($segments)
         );
     }
 }
