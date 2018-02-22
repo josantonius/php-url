@@ -189,7 +189,7 @@ class Url
                 $uri = rtrim($uri, '/') . '/';
                 break;
             case 'both':
-                $uri = '/' . trim($uri, '/') . '/';
+                $uri = ! empty($uri) ? '/' . trim($uri, '/') . '/' : '';
                 break;
             default:
                 $uri = false;
