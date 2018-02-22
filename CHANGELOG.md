@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0 - 2018-02-22
+
+* Bug fixed on the `setUrlParams` method.
+
 ## 1.1.9 - 2018-01-07
 
 * The tests were fixed.

@@ -142,7 +142,7 @@ class Url
      */
     public static function setUrlParams($url = false)
     {
-        $url = $url ?: self::getCurrentPage();
+        $url = $url !== false ? $url : self::getCurrentPage();
 
         if (strpos($url, '?') == false && strpos($url, '&') != false) {
             $url = preg_replace('/&/', '?', $url, 1);
