@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.1 - 2018-04-17
+
+* Bug fixed in `setUrlParams` method.
+
 ## 1.2.0 - 2018-02-22
 
 * Bugs fixed in `getBaseUrl` and `setUrlParams` method.

@@ -150,8 +150,6 @@ class Url
             $query = isset($parts['query']) ? $parts['query'] : '';
 
             parse_str($query, $query);
-
-            $url = str_replace($query, '', $url);
         }
 
         foreach (isset($query) ? $query : [] as $key => $value) {
