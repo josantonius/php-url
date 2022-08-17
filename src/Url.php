@@ -1,298 +1,304 @@
 <?php
-/**
- * Library for urls manipulation.
- *
- * @author    Josantonius - hello@josantonius.com
- * @author    David Carr  - dave@simplemvcframework.com
- * @copyright 2017 - 2018 (c) Josantonius - PHP-Url
- * @license   https://opensource.org/licenses/MIT - The MIT License (MIT)
- * @link      https://github.com/Josantonius/PHP-Url
- * @since     1.0.0
- */
+
+declare(strict_types=1);
+
+/*
+* This file is part of https://github.com/josantonius/php-url repository.
+*
+* (c) Josantonius <hello@josantonius.dev>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
 namespace Josantonius\Url;
 
 /**
- * URL handler.
+ * Access URL components.
  */
 class Url
 {
     /**
-     * Get URL from the current page.
+     * The authority of the URL, in "[user-info@][host][:port]" format.
      *
-     * @return string → URL
+     * @var string URL authority or empty string.
      */
-    public static function getCurrentPage()
-    {
-        $protocol = self::getProtocol();
-        $host = self::getDomain();
-        $port = ':' . self::getPort();
-        $port = (($port == ':80') || ($port == ':443')) ? '' : $port;
-        $uri = self::getUri();
+    public readonly string $authority;
 
-        return $protocol . '://' . $host . $port . $uri;
+    /**
+     * The base URL, in "[scheme:][//domain][:port]" format.
+     *
+     * @var string Base URL or empty string.
+     */
+    public readonly string $base;
+
+    /**
+     * The path basename of the URL, in "[filename][.extension]" format.
+     *
+     * @var string URL path basename or empty string.
+     */
+    public readonly string $basename;
+
+    /**
+     * The path dirname of the URL, in "[dirname]" format.
+     *
+     * @var string URL path dirname or empty string.
+     */
+    public readonly string $dirname;
+
+    /**
+     * The path basename extension of the URL, in "[extension]" format.
+     *
+     * @var string URL path basename extension or empty string.
+     */
+    public readonly string $extension;
+
+    /**
+     * The path filename of the URL, in "[filename]" format.
+     *
+     * @var string URL path filename or empty string.
+     */
+    public readonly string $filename;
+
+    /**
+     * The fragment of the URL, in "[fragment]" format.
+     *
+     * @var string URL fragment or empty string.
+     */
+    public readonly string $fragment;
+
+    /**
+     * The full URL.
+     */
+    public readonly string $full;
+
+    /**
+     * The hashed fragment of the URL, in "[#fragment]" format.
+     *
+     * @var string URL hashed fragment or empty string.
+     */
+    public readonly string $hash;
+
+    /**
+     * The host of the URL, in "[subdomain.][domain][.tld]" format.
+     *
+     * @var string URL host or empty string.
+     */
+    public readonly string $host;
+
+    /**
+     * The path of the URL, in "[path]" format.
+     *
+     * @var string URL path or empty string.
+     */
+    public readonly string $path;
+
+    /**
+     * The query parameters of the URL, in array format.
+     *
+     * @var array<string, mixed> URL query or empty string.
+     */
+    public readonly array $parameters;
+
+    /**
+     * The password of the URL, in "[password]" format.
+     *
+     * @var string URL password or empty string.
+     */
+    public readonly string $password;
+
+    /**
+     * The port of the URL, in "[port]" format.
+     *
+     * @var string URL port or empty string.
+     */
+    public readonly int|string $port;
+
+    /**
+     * The scheme of the URL, in "[scheme]" format.
+     *
+     * @var string URL scheme or empty string.
+     */
+    public readonly string $scheme;
+
+    /**
+     * The path segments of the URL, in array format.
+     *
+     * @var string[] URL path segments or empty array.
+     */
+    public readonly array $segments;
+
+    /**
+     * The query of the URL, in "[query]" format.
+     *
+     * @var string URL query or empty string.
+     */
+    public readonly string $query;
+
+    /**
+     * The user name of the URL, in "[username]" format.
+     *
+     * @var string URL username or empty string.
+     */
+    public readonly string $username;
+
+    /**
+     * Result of parse URL.
+     */
+    private array|bool $components;
+
+    /**
+     * Creates new instance.
+     *
+     * If no URL is provided, the URL of the current page will be generated.
+     * The generated URL will not include ports 80 and 443 in it.
+     */
+    public function __construct(?string $url = null)
+    {
+        $this->full = $url ?? $this->getCurrentUrl();
+
+        $components = parse_url($this->full) ?: [];
+
+        $this->components = [...$components, ...pathinfo($components['path'] ?? '')];
+
+        $this->setAttributes();
+
+        unset($this->components);
     }
 
     /**
-     * Get base URL of the site.
-     *
-     * @since 1.1.0
-     *
-     * @return string → URL
+     * Sets URL scheme.
      */
-    public static function getBaseUrl()
+    private function getCurrentUrl(): string
     {
-        $uri = self::addBackSlash(self::getUriMethods(), 'both');
-        $url = self::addBackSlash(self::getCurrentPage());
+        $path  = $_SERVER['REQUEST_URL'] ?? '';
+        $port  = $_SERVER['SERVER_PORT'] ?? '';
+        $host  = $_SERVER['SERVER_NAME'] ?? '';
+        $https = $_SERVER['HTTPS']       ?? '';
 
-        if ($uri !== '/') {
-            $url = trim(str_replace($uri, '', $url), '/');
-        }
+        $scheme = $https === 'on' ? 'https:' : 'http:';
 
-        return self::addBackSlash($url);
+        $port = in_array($port, ['80', '443']) ? '' : ':' .  $port;
+
+        return strtolower($scheme . ($host ? '//' . $host : '')) . $port . $path;
     }
 
-    /**
-     * Get protocol from current or passed URL.
-     *
-     * @param string $url
-     *
-     * @return string → http|https
-     */
-    public static function getProtocol($url = false)
+    private function setAttributes(): void
     {
-        if ($url) {
-            return (preg_match('/^https/', $url)) ? 'https' : 'http';
-        }
-
-        $protocol = strtolower($_SERVER['SERVER_PROTOCOL']);
-        $protocol = substr($protocol, 0, strpos($protocol, '/'));
-
-        $ssl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on');
-
-        return ($ssl) ? $protocol . 's' : $protocol;
+        $this->setFragment();
+        $this->setHost();
+        $this->setHash();
+        $this->setPath();
+        $this->setPort();
+        $this->setSegments();
+        $this->setQuery();
+        $this->setParameters();
+        $this->setFilename();
+        $this->setDirname();
+        $this->setBasename();
+        $this->setExtension();
+        $this->setScheme();
+        $this->setUsername();
+        $this->setPassword();
+        $this->setAuthority();
+        $this->setBase();
     }
 
-    /**
-     * Check if it is a secure site (SSL).
-     *
-     * @param string $url
-     *
-     * @return bool
-     */
-    public static function isSSL($url = false)
+    private function setAuthority(): void
     {
-        return self::getProtocol($url) === 'https';
+        $port     = $this->port     ? ':' . $this->port     : '';
+        $password = $this->password ? ':' . $this->password : '';
+
+        $userInfo = ($this->username . $password) ? $this->username . $password . '@' : '';
+
+        $this->authority = $userInfo . $this->host . $port;
     }
 
-    /**
-     * Get the server name.
-     *
-     * @param string $url
-     *
-     * @return string|false → server name
-     */
-    public static function getDomain($url = false)
+    private function setBase(): void
     {
-        if ($url) {
-            preg_match('/([\w]+[.]){1,}[a-z]+/', $url, $matches);
+        $scheme = $this->scheme ? $this->scheme . ':' : '';
+        $host   = $this->host   ? '//' . $this->host  : '';
+        $port   = $this->port   ? ':' . $this->port   : '';
 
-            return isset($matches[0]) ? $matches[0] : false;
-        }
-
-        return $_SERVER['SERVER_NAME'];
+        $this->base = $scheme . $host . $port;
     }
 
-    /**
-     * Get URI.
-     *
-     * @return string → path/URL
-     */
-    public static function getUri()
+    private function setBasename(): void
     {
-        return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $this->basename = $this->components['basename'] ?? '';
     }
 
-    /**
-     * Remove subdirectories from URI if they exist.
-     *
-     * @return string → method1/method2/method3
-     */
-    public static function getUriMethods()
+    private function setDirname(): void
     {
-        $root = str_replace($_SERVER['DOCUMENT_ROOT'], '', getcwd());
-        $subfolder = trim($root, '/');
-
-        return trim(str_replace($subfolder, '', self::getUri()), '/');
+        $this->dirname = $this->components['dirname'] ?? '';
     }
 
-    /**
-     * Set parameters from the URL and return URL without them.
-     *
-     * If a URL is received as: http://www.web.com/&key=value&key-2=value
-     * params will be saved as GET values and return: http://www.web.com/
-     *
-     * If a URL is received as: http://www.web.com/?key=value&key-2=value
-     * GET parameters are maintained and return: http://www.web.com/
-     *
-     * @since 1.1.5
-     *
-     * @param string $url → URL
-     *
-     * @return string → URL
-     */
-    public static function setUrlParams($url = false)
+    private function setExtension(): void
     {
-        $url = $url !== false ? $url : self::getCurrentPage();
-
-        if (strpos($url, '?') == false && strpos($url, '&') != false) {
-            $url = preg_replace('/&/', '?', $url, 1);
-            $parts = parse_url($url);
-            $query = isset($parts['query']) ? $parts['query'] : '';
-
-            parse_str($query, $query);
-        }
-
-        foreach (isset($query) ? $query : [] as $key => $value) {
-            $_GET[$key] = $value;
-        }
-
-        return explode('?', $url)[0];
+        $this->extension = $this->components['extension'] ?? '';
     }
 
-    /**
-     * Get the server port.
-     *
-     * @return int → server port
-     */
-    public static function getPort()
+    private function setFilename(): void
     {
-        return $_SERVER['SERVER_PORT'];
+        $this->filename = $this->components['filename'] ?? '';
     }
 
-    /**
-     * Add backslash if it does not exist at the end of the route.
-     *
-     * @param string $uri      → URI
-     * @param string $position → place where the backslash is placed
-     *
-     * @return string|false → path/url/ | /path/url | /path/url/
-     */
-    public static function addBackSlash($uri, $position = 'end')
+    private function setFragment(): void
     {
-        switch ($position) {
-            case 'top':
-                $uri = '/' . ltrim($uri, '/');
-                break;
-            case 'end':
-                $uri = rtrim($uri, '/') . '/';
-                break;
-            case 'both':
-                $uri = ! empty($uri) ? '/' . trim($uri, '/') . '/' : '';
-                break;
-            default:
-                $uri = false;
-        }
-
-        return $uri;
+        $this->fragment = $this->components['fragment'] ?? '';
     }
 
-    /**
-     * Go to the previous URL.
-     */
-    public static function previous()
+    private function setHash(): void
     {
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+        $this->hash = $this->fragment ? '#' . $this->fragment : '';
     }
 
-    /**
-     * Redirect to chosen URL.
-     *
-     * @param string $url → the URL to redirect
-     */
-    public static function redirect($url)
+    private function setHost(): void
     {
-        header('Location: ' . $url);
-        exit;
+        $this->host = $this->components['host'] ?? '';
     }
 
-    /**
-     * Converts plain text URLS into HTML links.
-     * Second argument will be used as the URL label <a href=''>$custom</a>.
-     *
-     * @param string $url    → URL
-     * @param string $custom → if provided, this is used for the link label
-     *
-     * @return string → returns the data with links created around URLS
-     */
-    public static function autoLink($url, $custom = null)
+    private function setParameters(): void
     {
-        $regex = '@(http)?(s)?(://)?(([-\w]+\.)+([^\s]+)+[^,.\s])@';
+        $params = [];
 
-        if ($custom === null) {
-            $replace = '<a href="http$2://$4">$1$2$3$4</a>';
-        } else {
-            $replace = '<a href="http$2://$4">' . $custom . '</a>';
-        }
+        parse_str($this->query, $params);
 
-        return preg_replace($regex, $replace, $url);
+        $this->parameters = $params;
     }
 
-    /**
-     * This function converts and URL segment to an safe one.
-     * For example: `test name @132` will be converted to `test-name--123`.
-     * It will also return all letters in lowercase
-     *
-     * @param string $slug → URL slug to clean up
-     *
-     * @return string → slug
-     */
-    public static function generateSafeSlug($slug)
+    private function setPassword(): void
     {
-        $slug = preg_replace('/[^a-zA-Z0-9]/', '-', $slug);
-        $slug = strtolower(trim($slug, '-'));
-        $slug = preg_replace('/\-{2,}/', '-', $slug);
-
-        return $slug;
+        $this->password = $this->components['pass'] ?? '';
     }
 
-    /**
-     * Get all URL parts based on a / seperator.
-     *
-     * @since 1.1.5
-     *
-     * @param string $uri → URI to segment
-     *
-     * @return string → segments
-     */
-    public static function segmentUri($uri = null)
+    private function setPath(): void
     {
-        $uri = (! is_null($uri)) ? $uri : $_SERVER['REQUEST_URI'];
-
-        return explode('/', trim($uri, '/'));
+        $this->path = $this->components['path'] ?? '';
     }
 
-    /**
-     * Get first item segment.
-     *
-     * @return string → segment
-     */
-    public static function getFirstSegment($segments)
+    private function setPort(): void
     {
-        $var = is_array($segments) ? $segments : self::segmentUri($segments);
-
-        return array_shift($var);
+        $this->port = $this->components['port'] ?? '';
     }
 
-    /**
-     * Get last item segment.
-     *
-     * @return string → segment
-     */
-    public static function getLastSegment($segments)
+    private function setQuery(): void
     {
-        $var = is_array($segments) ? $segments : self::segmentUri($segments);
+        $this->query = $this->components['query'] ?? '';
+    }
 
-        return end($var);
+    private function setScheme(): void
+    {
+        $this->scheme = $this->components['scheme'] ?? '';
+    }
+
+    private function setSegments(): void
+    {
+        $this->segments = $this->path ? explode('/', trim($this->path, '/')) : [];
+    }
+
+    private function setUsername(): void
+    {
+        $this->username = $this->components['user'] ?? '';
     }
 }
