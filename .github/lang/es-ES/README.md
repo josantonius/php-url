@@ -9,61 +9,62 @@
 [![PSR4](https://img.shields.io/badge/PSR-4-9b59b6.svg)](https://www.php-fig.org/psr/psr-4/)
 [![PSR12](https://img.shields.io/badge/PSR-12-1abc9c.svg)](https://www.php-fig.org/psr/psr-12/)
 
-**Translations**: [Español](.github/lang/es-ES/README.md)
+[English version](README.md)
 
-PHP library to access URL information.
+Biblioteca de PHP para acceder a la información de una URL.
 
-Provides an improved replacement for the access to the components of a URL offered by PHP's
-parse_url and pathinfo functions.
+Proporciona un reemplazo mejorado para el acceso a los componentes de una URL que ofrecen las
+funciones parse_url y pathinfo de PHP.
 
-This library does not format the provided URL, it only makes it easier to access the components.
-For something more advanced you can use something like `league/uri-components`.
+Esta biblioteca no formatea la URL proporcionada, sólo facilita el acceso a los componentes.
+Para algo más avanzado puede usar algo como `league/uri-components`.
 
 ---
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Available Classes](#available-classes)
-  - [Url Class](#url-class)
-- [Exceptions Used](#exceptions-used)
-- [Usage](#usage)
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Clases disponibles](#clases-disponibles)
+  - [Clase Url](#clase-url)
+- [Excepciones utilizadas](#excepciones-utilizadas)
+- [Uso](#uso)
 - [Tests](#tests)
-- [TODO](#todo)
-- [Changelog](#changelog)
-- [Contribution](#contribution)
-- [Sponsor](#Sponsor)
-- [License](#license)
+- [Tareas pendientes](#tareas-pendientes)
+- [Registro de Cambios](#registro-de-cambios)
+- [Contribuir](#contribuir)
+- [Patrocinar](#patrocinar)
+- [Licencia](#licencia)
 
 ---
 
-## Requirements
+## Requisitos
 
-This library is compatible with the PHP versions: 8.1.
+Esta biblioteca es compatible con las versiones de PHP: 8.1.
 
-## Installation
+## Instalación
 
-The preferred way to install this extension is through [Composer](http://getcomposer.org/download/).
+La mejor forma de instalarla es a través
+de [Composer](http://getcomposer.org/download/).
 
-To install **PHP URL library**, simply:
+Para instalar **PHP URL library**, simplemente escribe:
 
 ```console
 composer require josantonius/url
 ```
 
-The previous command will only install the necessary files,
-if you prefer to **download the entire source code** you can use:
+El comando anterior sólo instalará los archivos necesarios,
+si prefieres **descargar todo el código fuente** puedes utilizar:
 
 ```console
 composer require josantonius/url --prefer-source
 ```
 
-You can also **clone the complete repository** with Git:
+También puedes **clonar el repositorio** completo con Git:
 
 ```console
 git clone https://github.com/josantonius/php-url.git
 ```
 
-## Available Classes
+## Clases disponibles
 
 ### Url Class
 
@@ -71,215 +72,228 @@ git clone https://github.com/josantonius/php-url.git
 use Josantonius\Url\Url;
 ```
 
-Create a new instance:
+Crear una nueva instancia:
 
 ```php
 /**
- * If no URL is provided, the URL of the current page will be generated.
+ * Si no se proporciona ninguna URL, se generará la URL de la página actual.
  * 
- * The generated URL will exclude ports 80 and 443 and include the rest.
+ * La URL generada excluirá los puertos 80 y 443 e incluirá el resto.
+ *
+ * @throws UrlException si la URL no es válida.
  */
 new Url(string|null $url = null)
 ```
 
-Gets authority:
+Obtiene la autoridad:
 
 ```php
 /**
- * The authority, in "[user-info@][host][:port]" format.
+ * Autoridad en formato "[user-info@][host][:port]".
  *
- * @var string URL authority or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $authority
 ```
 
-Gets the base URL:
+Obtiene la URL base:
 
 ```php
 /**
- * The base URL, in "[scheme:][//domain][:port]" format.
+ * URL base, en formato "[scheme:][//domain][:port]".
  *
- * @var string Base URL or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $base
 ```
 
-Gets the path basename:
+Obtiene el nombre base de la ruta:
 
 ```php
 /**
- * The path basename, in "[filename][.extension]" format.
+ * El nombre base de la ruta en formato "[filename][.extension]".
  *
- * @var string URL path basename or empty string.
+ * @var string Nombre base de la ruta o cadena vacía.
  */
 public readonly string $basename
 ```
 
-Gets the path dirname:
+Obtiene el nombre del directorio de la ruta:
 
 ```php
 /**
- * The path dirname, in "[dirname]" format.
+ * Nombre del directorio de la ruta, en formato "[dirname]".
  *
- * @var string URL path dirname or empty string.
+ * @var string Nombre del directorio de la ruta o cadena vacía.
  */
 public readonly string $dirname
 ```
 
-Gets the path basename extension:
+Obtiene la extensión del nombre base de la ruta:
 
 ```php
 /**
- * The path basename extension, in "[extension]" format.
+ * La extensión del nombre base de la ruta en formato "[extension]".
  *
- * @var string URL path basename extension or empty string.
+ * @var string Extensión del nombre base de la ruta o cadena vacía.
  */
 public readonly string $extension
 ```
 
-Gets the path filename:
+Obtiene el nombre del archivo de la ruta:
 
 ```php
 /**
- * The path filename, in "[filename]" format.
+ * Nombre del archivo de la ruta en formato "[nombre de archivo]".
  *
- * @var string URL path filename or empty string.
+ * @var string Nombre del archivo de la ruta o cadena vacía.
  */
 public readonly string $filename
 ```
 
-Gets fragment:
+Obtiene el fragmento:
 
 ```php
 /**
- * URL fragment in "[fragment]" format.
+ * Fragmento en formato "[fragment]".
  *
- * @var string URL fragment or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $fragment
 ```
 
-Gets the full URL:
+Obtiene la URL completa:
 
 ```php
 public readonly string $full
 ```
 
-Gets hashed fragment:
+Obtiene el fragmento con hash:
 
 ```php
 /**
- * URL hashed fragment in "[#fragment]" format.
+ * Fragmento con hash en formato "[#fragment]".
  *
- * @var string URL hashed fragment or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $hash
 ```
 
-Gets host:
+Obtiene el dominio:
 
 ```php
 /**
- * URL host in "[subdomain.][domain][.tld]" format.
+ * Dominio en formato "[subdomain.][domain][.tld]".
  *
- * @var string URL host or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $host
 ```
 
-Gets path:
+Obtiene la ruta:
 
 ```php
 /**
- * URL path in "[path]" format.
+ * Ruta en formato "[path]".
  *
- * @var string URL path or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $path
 ```
 
-Gets the query parameters:
+Obtiene los parámetros de la consulta:
 
 ```php
 /**
- * URL query parameters in array format.
+ * Parámetros de la consulta en formato array.
  *
- * @var array<string, mixed> URL query parameters or empty string.
+ * @var array<string, mixed> Parámetros de la consulta o cadena vacía.
  */
 public readonly array $parameters
 ```
 
-Gets password:
+Obtiene la contraseña:
 
 ```php
 /**
- * URL password in "[password]" format.
+ * Contraseña en formato "[password]".
  *
- * @var string URL password or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $password
 ```
 
-Gets port:
+Obtiene el puerto:
 
 ```php
 /**
- * URL port in "[port]" format.
+ * Puerto en formato "[port]".
  *
- * @var string URL port or empty string.
+ * @var string The port as an integer or empty string if it does not exist.
  */
 public readonly int|string $port
 ```
 
-Gets scheme:
+Obtiene el esquema:
 
 ```php
 /**
- * URL scheme in "[scheme]" format.
+ * Esquema en formato "[scheme]".
  *
- * @var string URL scheme or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $scheme
 ```
 
-Gets path segments:
+Obtiene los segmentos de la ruta:
 
 ```php
 /**
- * URL path segments in array format.
+ * Segmentos de la ruta URL en formato array.
  *
- * @var string[] URL path segments or empty string.
+ * @var string[] Segmentos de la ruta URL o cadena vacía.
  */
 public readonly array $segments
 ```
 
-Gets query:
+Obtiene la consulta:
 
 ```php
 /**
- * URL query in "[query]" format.
+ * Consulta en formato "[query]".
  *
- * @var string URL query or empty string.
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $query
 ```
 
-Gets username:
+Obtiene la información de usuario:
 
 ```php
 /**
- * URL username in "[username]" format.
+ * Información de usuario en formato "[username][:password]".
  *
- * @var string URL username or empty string.
+ * @var string Elemento o cadena vacía.
+ */
+public readonly string $userInfo
+```
+
+Obtiene el nombre de usuario:
+
+```php
+/**
+ * Nombre de usuario en formato "[username]".
+ *
+ * @var string Elemento o cadena vacía.
  */
 public readonly string $username
 ```
 
-## Usage
+## Uso
 
-Example of use for this library:
+Ejemplo de uso de esta biblioteca:
 
-### Create a new instance using the current URL
+### Crear una nueva instancia utilizando la URL actual
 
 ```php
 use Josantonius\Url\Url;
@@ -287,7 +301,7 @@ use Josantonius\Url\Url;
 $url = new Url();
 ```
 
-### Create a new instance using custom URL
+### Crear una nueva instancia utilizando una URL personalizada
 
 ```php
 use Josantonius\Url\Url;
@@ -295,7 +309,7 @@ use Josantonius\Url\Url;
 $url = new Url('https://domain.com');
 ```
 
-### Gets authority
+### Obtiene la autoridad
 
 ```php
 use Josantonius\Url\Url;
@@ -320,7 +334,7 @@ $url = new Url('https://sub.domain.com/en/');
 $url->authority; // "sub.domain.com"
 ```
 
-### Gets base URL
+### Obtiene la URL base
 
 ```php
 use Josantonius\Url\Url;
@@ -340,7 +354,7 @@ $url = new Url('https://domain.com/en/');
 $url->base; // "https://domain.com"
 ```
 
-### Gets the path basename
+### Obtiene el nombre base de la ruta
 
 ```php
 use Josantonius\Url\Url;
@@ -360,7 +374,7 @@ $url = new Url('https://domain.com/en/web/docs?tag=bug');
 $url->basename; // "docs"
 ```
 
-### Gets the path dirname
+### Obtiene el nombre del directorio de la ruta
 
 ```php
 use Josantonius\Url\Url;
@@ -380,7 +394,7 @@ $url = new Url('https://domain.com/en/web/docs?tag=bug');
 $url->dirname; // "/en/web"
 ```
 
-### Gets the path basename extension
+### Obtiene la extensión del nombre base de la ruta
 
 ```php
 use Josantonius\Url\Url;
@@ -400,7 +414,7 @@ $url = new Url('https://domain.com/en/web/docs?tag=bug');
 $url->extension; // ""
 ```
 
-### Gets the path filename
+### Obtiene el nombre del archivo de la ruta
 
 ```php
 use Josantonius\Url\Url;
@@ -420,7 +434,7 @@ $url = new Url('https://domain.com/docs?tag=bug');
 $url->filename; // "docs"
 ```
 
-### Gets fragment
+### Obtiene el fragmento
 
 ```php
 use Josantonius\Url\Url;
@@ -440,7 +454,7 @@ $url = new Url('https://domain.com');
 $url->fragment; // ""
 ```
 
-### Gets the full URL
+### Obtiene la URL completa
 
 ```php
 use Josantonius\Url\Url;
@@ -455,7 +469,7 @@ $url = new Url('https://user:pass@sub.domain.com:90/en/');
 $url->full; // "https://user:pass@sub.domain.com:90/en/"
 ```
 
-### Gets hashed fragment
+### Obtiene el fragmento con hash
 
 ```php
 use Josantonius\Url\Url;
@@ -475,7 +489,7 @@ $url = new Url('https://domain.com');
 $url->hash; // ""
 ```
 
-### Gets host
+### Obtiene el dominio
 
 ```php
 use Josantonius\Url\Url;
@@ -500,7 +514,7 @@ $url = new Url('https://localhost');
 $url->host; // "localhost"
 ```
 
-### Gets path
+### Obtiene la ruta
 
 ```php
 use Josantonius\Url\Url;
@@ -530,7 +544,7 @@ $url = new Url('https://domain.com?tag=bug');
 $url->path; // ""
 ```
 
-### Gets the query parameters
+### Obtiene los parámetros de la consulta
 
 ```php
 use Josantonius\Url\Url;
@@ -545,7 +559,7 @@ $url = new Url('https://domain.com/en/web/docs/search.php');
 $url->parameters; // ""
 ```
 
-### Gets password
+### Obtiene la contraseña
 
 ```php
 use Josantonius\Url\Url;
@@ -565,7 +579,7 @@ $url = new Url('https://user@domain.com');
 $url->password; // ""
 ```
 
-### Gets port
+### Obtiene el puerto
 
 ```php
 use Josantonius\Url\Url;
@@ -600,7 +614,7 @@ $url = new Url('https://domain.com/en/');
 $url->port; // ""
 ```
 
-### Gets scheme
+### Obtiene el esquema
 
 ```php
 use Josantonius\Url\Url;
@@ -615,7 +629,7 @@ $url = new Url('https://domain.com');
 $url->scheme; // "https"
 ```
 
-### Gets path segments
+### Obtiene los segmentos de la ruta
 
 ```php
 use Josantonius\Url\Url;
@@ -630,7 +644,7 @@ $url = new Url('https://domain.com/en/web/docs/search.php');
 $url->segments; // ['en', 'web', 'docs', 'search.php']
 ```
 
-### Gets query
+### Obtiene la consulta
 
 ```php
 use Josantonius\Url\Url;
@@ -644,12 +658,38 @@ $url = new Url('https://domain.com?tag=bug&order=asc#top');
 
 $url->query; // "tag=bug&order=asc"
 
+
 $url = new Url('https://domain.com');
 
 $url->query; // ""
 ```
 
-### Gets username
+### Obtiene la información de usuario
+
+```php
+use Josantonius\Url\Url;
+
+$url = new Url(); // https://user@domain.com
+
+$url->userInfo; // "user"
+
+
+$url = new Url('https://:pass@domain.com');
+
+$url->userInfo; // ":pass"
+
+
+$url = new Url('https://user:pass@domain.com');
+
+$url->userInfo; // "user:pass"
+
+
+$url = new Url('https://domain.com');
+
+$url->userInfo; // ""
+```
+
+### Obtiene el nombre de usuario
 
 ```php
 use Josantonius\Url\Url;
@@ -676,8 +716,8 @@ $url->username; // ""
 
 ## Tests
 
-To run [tests](tests) you just need [composer](http://getcomposer.org/download/)
-and to execute the following:
+Para ejecutar las [pruebas](tests) necesitarás [Composer](http://getcomposer.org/download/)
+y seguir los siguientes pasos:
 
 ```console
 git clone https://github.com/josantonius/php-url.git
@@ -691,57 +731,59 @@ cd PHP-Url
 composer install
 ```
 
-Run unit tests with [PHPUnit](https://phpunit.de/):
+Ejecutar pruebas unitarias con [PHPUnit](https://phpunit.de/):
 
 ```console
 composer phpunit
 ```
 
-Run code standard tests with [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer):
-
-```console
-composer phpcs
-```
-
-Run [PHP Mess Detector](https://phpmd.org/) tests to detect inconsistencies in code style:
-
-```console
-composer phpmd
-```
-
-Run all previous tests:
+Ejecutar pruebas de estándares de código
+con [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer):
 
 ```console
 composer tests
 ```
 
-## TODO
+Ejecutar pruebas con [PHP Mess Detector](https://phpmd.org/) para detectar
+inconsistencias en el estilo de codificación:
 
-- [ ] Add new feature
-- [ ] Improve tests
-- [ ] Improve documentation
-- [ ] Improve English translation in the README file
-- [ ] Refactor code for disabled code style rules (see phpmd.xml and phpcs.xml)
+```console
+composer phpmd
+```
 
-## Changelog
+Ejecutar todas las pruebas anteriores:
 
-Detailed changes for each release are documented in the
-[release notes](https://github.com/josantonius/php-url/releases).
+    composer tests
 
-## Contribution
+## Tareas pendientes
 
-Please make sure to read the [Contributing Guide](.github/CONTRIBUTING.md), before making a pull
-request, start a discussion or report a issue.
+- [ ] Añadir nueva funcionalidad
+- [ ] Mejorar pruebas
+- [ ] Mejorar documentación
+- [ ] Mejorar la traducción al inglés en el archivo README
+- [ ] Refactorizar código para las reglas de estilo de código deshabilitadas
+(ver [phpmd.xml](phpmd.xml) y [phpcs.xml](phpcs.xml))
 
-Thanks to all [contributors](https://github.com/josantonius/php-url/graphs/contributors)! :heart:
+## Registro de Cambios
 
-## Sponsor
+Los cambios detallados de cada versión se documentan en las
+[notas de la misma](https://github.com/josantonius/php-url/releases).
 
-If this project helps you to reduce your development time,
-[you can sponsor me](https://github.com/josantonius#sponsor) to support my open source work :blush:
+## Contribuir
 
-## License
+Por favor, asegúrate de leer la [Guía de contribución](CONTRIBUTING.md) antes de hacer un
+_pull request_, comenzar una discusión o reportar un _issue_.
 
-This repository is licensed under the [MIT License](LICENSE).
+¡Gracias por [colaborar](https://github.com/josantonius/php-url/graphs/contributors)! :heart:
 
-Copyright © 2017-present, [Josantonius](https://github.com/josantonius#contact)
+## Patrocinar
+
+Si este proyecto te ayuda a reducir el tiempo de desarrollo,
+[puedes patrocinarme](https://github.com/josantonius/lang/es-ES/README.md#patrocinar)
+para apoyar mi trabajo :blush:
+
+## Licencia
+
+Este repositorio tiene una licencia [MIT License](LICENSE).
+
+Copyright © 2017-actualidad, [Josantonius](https://github.com/josantonius/lang/es-ES/README.md#contacto)
