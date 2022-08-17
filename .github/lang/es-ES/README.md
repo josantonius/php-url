@@ -14,7 +14,7 @@
 Biblioteca de PHP para acceder a la información de una URL.
 
 Proporciona un reemplazo mejorado para el acceso a los componentes de una URL que ofrecen las
-funciones parse_url y pathinfo de PHP.
+funciones `parse_url` y `pathinfo` de PHP.
 
 Esta biblioteca no formatea la URL proporcionada, sólo facilita el acceso a los componentes.
 Para algo más avanzado puede usar algo como `league/uri-components`.

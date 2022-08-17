@@ -14,7 +14,7 @@
 PHP library to access URL information.
 
 Provides an improved replacement for the access to the components of a URL offered by PHP's
-parse_url and pathinfo functions.
+`parse_url` and `pathinfo` functions.
 
 This library does not format the provided URL, it only makes it easier to access the components.
 For something more advanced you can use something like `league/uri-components`.
