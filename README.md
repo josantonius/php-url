@@ -25,7 +25,6 @@ For something more advanced you can use something like `league/uri-components`.
 - [Installation](#installation)
 - [Available Classes](#available-classes)
   - [Url Class](#url-class)
-- [Exceptions Used](#exceptions-used)
 - [Usage](#usage)
 - [Tests](#tests)
 - [TODO](#todo)
@@ -684,7 +683,7 @@ git clone https://github.com/josantonius/php-url.git
 ```
 
 ```console
-cd PHP-Url
+cd php-url
 ```
 
 ```console

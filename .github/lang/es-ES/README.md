@@ -25,7 +25,6 @@ Para algo más avanzado puede usar algo como `league/uri-components`.
 - [Instalación](#instalación)
 - [Clases disponibles](#clases-disponibles)
   - [Clase Url](#clase-url)
-- [Excepciones utilizadas](#excepciones-utilizadas)
 - [Uso](#uso)
 - [Tests](#tests)
 - [Tareas pendientes](#tareas-pendientes)
@@ -724,7 +723,7 @@ git clone https://github.com/josantonius/php-url.git
 ```
 
 ```console
-cd PHP-Url
+cd php-url
 ```
 
 ```console
@@ -753,7 +752,9 @@ composer phpmd
 
 Ejecutar todas las pruebas anteriores:
 
-    composer tests
+```console
+composer tests
+```
 
 ## Tareas pendientes
 
