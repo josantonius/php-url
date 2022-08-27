@@ -30,7 +30,7 @@ For something more advanced you can use something like `league/uri-components`.
 - [TODO](#todo)
 - [Changelog](#changelog)
 - [Contribution](#contribution)
-- [Sponsor](#Sponsor)
+- [Sponsor](#sponsor)
 - [License](#license)
 
 ---
@@ -66,9 +66,7 @@ git clone https://github.com/josantonius/php-url.git
 
 ### Url Class
 
-```php
-use Josantonius\Url\Url;
-```
+`Josantonius\Url\Url`
 
 Create a new instance:
 
@@ -78,7 +76,7 @@ Create a new instance:
  * 
  * The generated URL will exclude ports 80 and 443 and include the rest.
  */
-new Url(string|null $url = null)
+public function __construct(null|string $url = null);
 ```
 
 Gets authority:
@@ -89,7 +87,7 @@ Gets authority:
  *
  * @var string URL authority or empty string.
  */
-public readonly string $authority
+public readonly string $authority;
 ```
 
 Gets the base URL:
@@ -100,7 +98,7 @@ Gets the base URL:
  *
  * @var string Base URL or empty string.
  */
-public readonly string $base
+public readonly string $base;
 ```
 
 Gets the path basename:
@@ -111,7 +109,7 @@ Gets the path basename:
  *
  * @var string URL path basename or empty string.
  */
-public readonly string $basename
+public readonly string $basename;
 ```
 
 Gets the path dirname:
@@ -122,7 +120,7 @@ Gets the path dirname:
  *
  * @var string URL path dirname or empty string.
  */
-public readonly string $dirname
+public readonly string $dirname;
 ```
 
 Gets the path basename extension:
@@ -133,7 +131,7 @@ Gets the path basename extension:
  *
  * @var string URL path basename extension or empty string.
  */
-public readonly string $extension
+public readonly string $extension;
 ```
 
 Gets the path filename:
@@ -144,7 +142,7 @@ Gets the path filename:
  *
  * @var string URL path filename or empty string.
  */
-public readonly string $filename
+public readonly string $filename;
 ```
 
 Gets fragment:
@@ -155,13 +153,13 @@ Gets fragment:
  *
  * @var string URL fragment or empty string.
  */
-public readonly string $fragment
+public readonly string $fragment;
 ```
 
 Gets the full URL:
 
 ```php
-public readonly string $full
+public readonly string $full;
 ```
 
 Gets hashed fragment:
@@ -172,7 +170,7 @@ Gets hashed fragment:
  *
  * @var string URL hashed fragment or empty string.
  */
-public readonly string $hash
+public readonly string $hash;
 ```
 
 Gets host:
@@ -183,7 +181,7 @@ Gets host:
  *
  * @var string URL host or empty string.
  */
-public readonly string $host
+public readonly string $host;
 ```
 
 Gets path:
@@ -194,7 +192,7 @@ Gets path:
  *
  * @var string URL path or empty string.
  */
-public readonly string $path
+public readonly string $path;
 ```
 
 Gets the query parameters:
@@ -205,7 +203,7 @@ Gets the query parameters:
  *
  * @var array<string, mixed> URL query parameters or empty string.
  */
-public readonly array $parameters
+public readonly array $parameters;
 ```
 
 Gets password:
@@ -216,7 +214,7 @@ Gets password:
  *
  * @var string URL password or empty string.
  */
-public readonly string $password
+public readonly string $password;
 ```
 
 Gets port:
@@ -227,7 +225,7 @@ Gets port:
  *
  * @var string URL port or empty string.
  */
-public readonly int|string $port
+public readonly int|string $port;
 ```
 
 Gets scheme:
@@ -238,7 +236,7 @@ Gets scheme:
  *
  * @var string URL scheme or empty string.
  */
-public readonly string $scheme
+public readonly string $scheme;
 ```
 
 Gets path segments:
@@ -249,7 +247,7 @@ Gets path segments:
  *
  * @var string[] URL path segments or empty string.
  */
-public readonly array $segments
+public readonly array $segments;
 ```
 
 Gets query:
@@ -260,7 +258,7 @@ Gets query:
  *
  * @var string URL query or empty string.
  */
-public readonly string $query
+public readonly string $query;
 ```
 
 Gets username:
@@ -271,7 +269,7 @@ Gets username:
  *
  * @var string URL username or empty string.
  */
-public readonly string $username
+public readonly string $username;
 ```
 
 ## Usage
