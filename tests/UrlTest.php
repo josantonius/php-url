@@ -1,23 +1,24 @@
 <?php
 
 /*
-* This file is part of https://github.com/josantonius/php-url repository.
-*
-* (c) Josantonius <hello@josantonius.dev>
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of https://github.com/josantonius/php-url repository.
+ *
+ * (c) Josantonius <hello@josantonius.dev>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+ */
 
 namespace Josantonius\Url\Tests;
 
-use ReflectionClass;
 use Josantonius\Url\Url;
 use PHPUnit\Framework\TestCase;
 
 class UrlTest extends TestCase
 {
-    public function testShouldSetTheCurrentUrl()
+    public function test_should_set_the_current_url()
     {
         $currentUrl =
             'https://' .
@@ -31,7 +32,7 @@ class UrlTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldNotContainCommonHttpPorts()
+    public function test_should_not_contain_common_http_ports()
     {
         $_SERVER['SERVER_PORT'] = 80;
 
@@ -45,7 +46,7 @@ class UrlTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldContainValidSchemeWhenIsSecureSite()
+    public function test_should_contain_valid_scheme_when_is_secure_site()
     {
         $this->assertStringContainsString('https:', (new Url())->full);
     }
@@ -53,14 +54,14 @@ class UrlTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testShouldContainValidSchemeWhenIsNonSecureSite()
+    public function test_should_contain_valid_scheme_when_is_non_secure_site()
     {
         $_SERVER['HTTPS'] = 'off';
 
         $this->assertStringContainsString('http:', (new Url())->full);
     }
 
-    public function testShouldSetAllProperties()
+    public function test_should_set_all_properties()
     {
         $url = new Url(
             'https://user:pass@sub.domain.com:90/en/web/docs/search.php?tag=bug&order=asc#top'
@@ -85,7 +86,7 @@ class UrlTest extends TestCase
         $this->assertEquals('#top', $url->hash);
     }
 
-    public function testShouldSetNonexistentPropertiesAsEmpty()
+    public function test_should_set_nonexistent_properties_as_empty()
     {
         $url = new Url('');
 
@@ -108,21 +109,21 @@ class UrlTest extends TestCase
         $this->assertEquals('', $url->hash);
     }
 
-    public function testAuthorityComponentShouldBeSetUpWithoutThePort()
+    public function test_authority_component_should_be_set_up_without_the_port()
     {
         $url = new Url('https://user:pass@sub.domain.com');
 
         $this->assertEquals('user:pass@sub.domain.com', $url->authority);
     }
 
-    public function testAuthorityComponentShouldBeSetUpWithoutTheUserInfo()
+    public function test_authority_component_should_be_set_up_without_the_user_info()
     {
         $url = new Url('https://sub.domain.com');
 
         $this->assertEquals('sub.domain.com', $url->authority);
     }
 
-    public function testShouldNotIgnoreThePortEvenIfItIsCommonWhenTheUrlIsCustom()
+    public function test_should_not_ignore_the_port_even_if_it_is_common_when_the_url_is_custom()
     {
         $url = new Url('https://user:pass@sub.domain.com:80');
 
