@@ -37,7 +37,9 @@ Para algo más avanzado puede usar algo como `league/uri-components`.
 
 ## Requisitos
 
-Esta biblioteca es compatible con las versiones de PHP: 8.1.
+- Sistema operativo: Linux | Windows.
+
+- Versiones de PHP: 8.1 | 8.2.
 
 ## Instalación
 
@@ -65,11 +67,9 @@ git clone https://github.com/josantonius/php-url.git
 
 ## Clases disponibles
 
-### Url Class
+### Clase Url
 
-```php
-use Josantonius\Url\Url;
-```
+`Josantonius\Url\Url`
 
 Crear una nueva instancia:
 
@@ -81,7 +81,7 @@ Crear una nueva instancia:
  *
  * @throws UrlException si la URL no es válida.
  */
-new Url(string|null $url = null)
+public function __construct(null|string $url = null);
 ```
 
 Obtiene la autoridad:
@@ -92,7 +92,7 @@ Obtiene la autoridad:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $authority
+public readonly string $authority;
 ```
 
 Obtiene la URL base:
@@ -103,7 +103,7 @@ Obtiene la URL base:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $base
+public readonly string $base;
 ```
 
 Obtiene el nombre base de la ruta:
@@ -114,7 +114,7 @@ Obtiene el nombre base de la ruta:
  *
  * @var string Nombre base de la ruta o cadena vacía.
  */
-public readonly string $basename
+public readonly string $basename;
 ```
 
 Obtiene el nombre del directorio de la ruta:
@@ -125,7 +125,7 @@ Obtiene el nombre del directorio de la ruta:
  *
  * @var string Nombre del directorio de la ruta o cadena vacía.
  */
-public readonly string $dirname
+public readonly string $dirname;
 ```
 
 Obtiene la extensión del nombre base de la ruta:
@@ -136,7 +136,7 @@ Obtiene la extensión del nombre base de la ruta:
  *
  * @var string Extensión del nombre base de la ruta o cadena vacía.
  */
-public readonly string $extension
+public readonly string $extension;
 ```
 
 Obtiene el nombre del archivo de la ruta:
@@ -147,7 +147,7 @@ Obtiene el nombre del archivo de la ruta:
  *
  * @var string Nombre del archivo de la ruta o cadena vacía.
  */
-public readonly string $filename
+public readonly string $filename;
 ```
 
 Obtiene el fragmento:
@@ -158,13 +158,13 @@ Obtiene el fragmento:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $fragment
+public readonly string $fragment;
 ```
 
 Obtiene la URL completa:
 
 ```php
-public readonly string $full
+public readonly string $full;
 ```
 
 Obtiene el fragmento con hash:
@@ -175,7 +175,7 @@ Obtiene el fragmento con hash:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $hash
+public readonly string $hash;
 ```
 
 Obtiene el dominio:
@@ -186,7 +186,7 @@ Obtiene el dominio:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $host
+public readonly string $host;
 ```
 
 Obtiene la ruta:
@@ -197,7 +197,7 @@ Obtiene la ruta:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $path
+public readonly string $path;
 ```
 
 Obtiene los parámetros de la consulta:
@@ -208,7 +208,7 @@ Obtiene los parámetros de la consulta:
  *
  * @var array<string, mixed> Parámetros de la consulta o cadena vacía.
  */
-public readonly array $parameters
+public readonly array $parameters;
 ```
 
 Obtiene la contraseña:
@@ -219,7 +219,7 @@ Obtiene la contraseña:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $password
+public readonly string $password;
 ```
 
 Obtiene el puerto:
@@ -230,7 +230,7 @@ Obtiene el puerto:
  *
  * @var string The port as an integer or empty string if it does not exist.
  */
-public readonly int|string $port
+public readonly int|string $port;
 ```
 
 Obtiene el esquema:
@@ -241,7 +241,7 @@ Obtiene el esquema:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $scheme
+public readonly string $scheme;
 ```
 
 Obtiene los segmentos de la ruta:
@@ -252,7 +252,7 @@ Obtiene los segmentos de la ruta:
  *
  * @var string[] Segmentos de la ruta URL o cadena vacía.
  */
-public readonly array $segments
+public readonly array $segments;
 ```
 
 Obtiene la consulta:
@@ -263,7 +263,7 @@ Obtiene la consulta:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $query
+public readonly string $query;
 ```
 
 Obtiene la información de usuario:
@@ -274,7 +274,7 @@ Obtiene la información de usuario:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $userInfo
+public readonly string $userInfo;
 ```
 
 Obtiene el nombre de usuario:
@@ -285,7 +285,7 @@ Obtiene el nombre de usuario:
  *
  * @var string Elemento o cadena vacía.
  */
-public readonly string $username
+public readonly string $username;
 ```
 
 ## Uso
